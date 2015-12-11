@@ -43,9 +43,21 @@
       $scope.questions.$add({
         text: $scope.newQuestionText,
         date: timestamp.getTime(),
-        answer: ""
+        answer: "",
+        status: "",
       });
+
+      $scope.newQuestionText = "";
+
     };
+
+
+    $scope.answerQuestion = function (question) {
+      ref.child(question.$id).update({
+        "answer": question.answer,
+        "status": "answered"
+      })
+    }
 
   });
 

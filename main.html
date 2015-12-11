@@ -33,7 +33,7 @@
           <div class="add-question">
             <form class="ask-form" name="myForm" ng-submit="addQuestion()">
               <input ng-model="newQuestionText" placeholder="What do you want to know?" />
-              <button type="submit" onclick="submitForm()">Submit</button>
+              <button type="submit">Submit</button>
             </form>
           </div>
         </div>
@@ -54,6 +54,13 @@
                   <div class="question-set">
                     <div class="q">{{question.text}} <span>Unanswered</span></div>
                     <span class="date">{{question.date | date:'MM/dd/yyyy h:mm a'}}</span>
+                    <div class="answer" ng-show="question.status == 'answered'">
+                      {{question.answer}}
+                    </div>
+                    <div class="answer-form" ng-hide="question.status == 'answered'">
+                      <input ng-model="question.answer" placeholder="What do you want to know?" />
+                      <button ng-click="answerQuestion(question)">Answer</button>
+                    </div>
                     <!--                  <div class="a">{{question.answer}}</div>-->
                   </div>
                 </div>
