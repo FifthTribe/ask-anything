@@ -6,6 +6,8 @@
   <title>Ask Anything</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <link rel="stylesheet" href="style/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
 
   <!-- AngularJS -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
@@ -21,40 +23,47 @@
 
 <body>
   <div class="app">
-    <div class="container">
+    <div ng-controller='FirebaseCtrl'>
 
       <!--      Ask a question-->
-      <h1>Ask Anything, literaly anything!</h1>
-
-      <br/>
-      <div ng-controller='FirebaseCtrl'>
-        <div class="add-question">
-          <form name="myForm" ng-submit="addQuestion()">
-            <input ng-model="newQuestionText" placeholder="What's your question?" />
-            <button type="submit" onclick="submitForm()">Submit</button>
-          </form>
-        </div>
-        <!--      List of question-->
-        <h2>Latest question</h2>
-        <div ng-repeat="question in questions">
-          <div class="question-set">
-            <div class="q">{{question.text}}</div>
-            <div class="add-answer">
-              <form name="myForm" ng-submit="addQuestion()">
-                <input ng-model="newQuestionText" placeholder="What's your question?" />
-                <button type="submit" onclick="submitForm()">Submit</button>
-              </form>
-            </div>
+      <section class="ask">
+        <div class="container">
+          <img src="img/askanything.png">
+          <div class="description">You can ask literally anything.</div>
+          <div class="add-question">
+            <form class="ask-form" name="myForm" ng-submit="addQuestion()">
+              <input ng-model="newQuestionText" placeholder="What do you want to know?" />
+              <button type="submit" onclick="submitForm()">Submit</button>
+            </form>
           </div>
-
-
         </div>
+      </section>
+
+      <div class="up"><i class="fa fa-arrow-circle-o-up"></i></i>
       </div>
 
 
+      <!--      List of question-->
+      <section class="recent">
+        <div class="container">
+          <h2>Recently asked questions</h2>
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <div class="questions">
+                <div ng-repeat="question in questions">
+                  <div class="question-set">
+                    <div class="q">{{question.text}} <span>Unanswered</span></div>
+                    <span class="date">{{question.date | date:'MM/dd/yyyy h:mm a'}}</span>
+                    <!--                  <div class="a">{{question.answer}}</div>-->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
+      </section>
     </div>
-
 
   </div>
 </body>

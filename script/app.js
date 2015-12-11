@@ -40,29 +40,12 @@
     // add new question
     $scope.addQuestion = function () {
       var timestamp = new Date();
-      var timestampDate = timestamp.getDate();
-      var timestampMonth = timestamp.getMonth();
       $scope.questions.$add({
         text: $scope.newQuestionText,
-        date: timestampDate,
-        month: timestampMonth,
-        answer: $scope.newAnswerText
+        date: timestamp.getTime(),
+        answer: ""
       });
     };
-
-    // Answer
-    $scope.questionAnswer = function (question) {
-      // task.completed = true;
-      task.asnwer = $scope.newAnswerText;
-      // $scope.tasks.set({task});
-      console.log(task);
-
-      var taskRef = new Firebase('"https://askanything.firebaseio.com/questions"/' + question.$id);
-
-      taskRef.update({
-        "answer": $scope.newAnswerText;
-      });
-    }
 
   });
 
