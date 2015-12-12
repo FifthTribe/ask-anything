@@ -1,0 +1,12 @@
+{
+  "name": "Ask Anything",
+  "version": "0.0.0",
+  "homepage": "https://github.com/FifthTribe/ask-anything",
+  "authors": [
+    "kimanhle90 <kimanh.le90@gmail.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "angular-timeago": "~0.2.4"
+  }
+}

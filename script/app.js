@@ -1,38 +1,14 @@
 (function () {
 
   // Start App Module
-  var askAnything = angular.module("askAnything", ['ui.router', 'firebase']);
-
-  // This part control App Views
-
-  //  askAnything.config(['$stateProvider', '$locationProvider', function ($stateProvider, $locationProvider) {
-  //    $locationProvider.html5Mode({
-  //      enabled: true,
-  //      requireBase: false
-  //    });
-  //
-  //    $stateProvider.state('home', {
-  //      url: '/',
-  //      controller: 'home.controller',
-  //      templateUrl: '/templates/home.html'
-  //    });
-  //
-  //    $stateProvider.state('main', {
-  //      url: '/main',
-  //      controller: 'main.controller',
-  //      templateUrl: '/templates/main.html'
-  //    });
-  //}]);
-  //
-  //  askAnything.controller('home.controller', ['$scope', function ($scope) {}]);
-  //
-  //  askAnything.controller('main.controller', ['$scope', function ($scope) {}]);
+  var askAnything = angular.module("askAnything", ['firebase']);
 
 
   //Firebase stuff starts here
 
   askAnything.controller("FirebaseCtrl", function ($scope, $firebaseArray) {
     var ref = new Firebase("https://askanything.firebaseio.com/questions");
+
 
     // create a synchronized array
     $scope.questions = $firebaseArray(ref);

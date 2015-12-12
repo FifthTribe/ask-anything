@@ -39,38 +39,72 @@
         </div>
       </section>
 
-      <div class="up"><i class="fa fa-arrow-circle-o-up"></i></i>
-      </div>
-
 
       <!--      List of question-->
-      <section class="recent">
-        <div class="container">
-          <h2>Recently asked questions</h2>
-          <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-              <div class="questions">
-                <div ng-repeat="question in questions">
-                  <div class="question-set">
-                    <div class="q">{{question.text}} <span>Unanswered</span></div>
-                    <span class="date">{{question.date | date:'MM/dd/yyyy h:mm a'}}</span>
-                    <div class="answer" ng-show="question.status == 'answered'">
+      <section class="question-list">
+        <div class="up"><i class="fa fa-arrow-circle-o-up"></i></i>
+        </div>
+        <div class="recent">
+          <div class="container">
+            <h2>Recently asked questions</h2>
+            <div class="row">
+              <div class="col-md-10 col-md-offset-1">
+                <div class=" questions row " ng-repeat="question in questions | orderBy:'-date'">
+
+                  <div class="col-md-10 ">
+                    <div class="date ">{{question.date | date:'MM.dd.yyyy'}}</div>
+                    <div class="q ">{{question.text}}</div>
+                  </div>
+                  <div class="col-md-12 ">
+
+                    <!-- Answer input-->
+                    <div class="answer-form" ng-hide="question.status=='answered' ">
+                      <input ng-model="question.answer " placeholder="You have the answer? " />
+                      <button type="submit" ng-click="answerQuestion(question) ">Submit</button>
+                    </div>
+
+                    <!-- Anwser-->
+                    <div class="answer " ng-show="question.status=='answered' ">
                       {{question.answer}}
                     </div>
-                    <div class="answer-form" ng-hide="question.status == 'answered'">
-                      <input ng-model="question.answer" placeholder="What do you want to know?" />
-                      <button ng-click="answerQuestion(question)">Answer</button>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+            <!--
+            <div class="row ">
+              <div class="col-md-8 col-md-offset-2 ">
+                <div class="questions ">
+                  <div ng-repeat="question in questions ">
+                    <div class="q row ">
+                      <div class="col-md-6 question-set ">
+                        <div>{{question.text}} <span ng-hide="question.status=='answered' ">Unanswered</span></div>
+                      </div>
+                      <div class="col-md-5 ">
+                        <div class="date ">{{question.date | date:'MM/dd/yyyy h:mm a'}}</div>
+                      </div>
                     </div>
-                    <!--                  <div class="a">{{question.answer}}</div>-->
+                    <div class="answer " ng-show="question.status=='answered' ">
+                      {{question.answer}}
+                    </div>
+                    <div class="answer-form " ng-hide="question.status=='answered' ">
+                      <input ng-model="question.answer " placeholder="What do you want to know? " />
+                      <button ng-click="answerQuestion(question) ">Answer</button>
+                    </div>
+                  
                   </div>
                 </div>
               </div>
             </div>
+-->
           </div>
         </div>
-
-      </section>
     </div>
+
+    </section>
+  </div>
 
   </div>
 </body>
