@@ -172,4 +172,21 @@ h3 {
   font-size: 13px;
   font-weight: 200; }
 
+@media (max-width: 786px) {
+  /* line 186, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  .ask img {
+    max-width: 300px; }
+  /* line 191, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  .ask-form imput {
+    width: 80%; }
+  /* line 194, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  .ask-form button {
+    display: none; }
+  /* line 198, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  .question-list {
+    top: 250px; }
+  /* line 202, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  answer-form button {
+    display: none; } }
+
 /*# sourceMappingURL=main.css.map */

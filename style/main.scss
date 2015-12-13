@@ -180,3 +180,27 @@ h3 {
   font-size: 13px;
   font-weight: 200;
 }
+
+@media (max-width: 786px) {
+  .ask {
+    img {
+      max-width: 300px
+    }
+  }
+  .ask-form {
+    imput {
+      width: 80%
+    }
+    button {
+      display: none;
+    }
+  }
+  .question-list {
+    top: 250px
+  }
+  answer-form {
+    button {
+      display: none;
+    }
+  }
+}

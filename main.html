@@ -47,17 +47,10 @@
         </div>
         <div class="recent">
           <div class="container">
+
             <div class="row">
               <div class="col-md-6">
                 <h2>Recently asked</h2>
-              </div>
-              <div class="col-md-6">
-                <h2>Favorites</h2>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-
                 <!-- Unanswered-->
                 <div class="questions" ng-repeat="question in questions | filter: { status: 0 } | orderBy:'-date'">
                   <div class="row">
@@ -67,10 +60,10 @@
                       <div class="q ">{{question.text}}</div>
 
                       <!-- Answer input-->
-                      <div class="answer-form">
+                      <form class="answer-form" ng-submit="answerQuestion(question)">
                         <input ng-model="question.answer" placeholder="You have the answer? " />
-                        <button type="submit" ng-click="answerQuestion(question)">Submit</button>
-                      </div>
+                        <button type="submit">Submit</button>
+                      </form>
 
                     </div>
                     <div class="col-md-2">
@@ -104,6 +97,7 @@
 
               <!--Favorites-->
               <div class="col-md-6">
+                <h2>Favorites</h2>
                 <div class="questions" ng-repeat="question in questions | orderBy:'-heart' | limitTo : 10" ng-hide="question.heart < 5">
                   <div class="row">
                     <div class="col-md-10 ">
@@ -112,10 +106,10 @@
                       <div class="q ">{{question.text}}</div>
 
                       <!-- Answer input-->
-                      <div class="answer-form" ng-hide="question.status == 1">
+                      <form class="answer-form" ng-submit="answerQuestion(question)" ng-hide="question.status == 1">
                         <input ng-model="question.answer" placeholder="You have the answer? " />
-                        <button type="submit" ng-click="answerQuestion(question)">Submit</button>
-                      </div>
+                        <button type="submit">Submit</button>
+                      </form>
 
                       <!-- Anwser-->
                       <div class="answer" ng-show="question.status == 1">
