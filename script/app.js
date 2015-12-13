@@ -1,14 +1,14 @@
 (function () {
 
   // Start App Module
-  var askAnything = angular.module("askAnything", ['firebase']);
+  var askAnything = angular.module("askAnything", ['firebase'
+  ]);
 
 
   //Firebase stuff starts here
 
   askAnything.controller("FirebaseCtrl", function ($scope, $firebaseArray) {
     var ref = new Firebase("https://askanything.firebaseio.com/questions");
-
 
     // create a synchronized array
     $scope.questions = $firebaseArray(ref);
@@ -20,7 +20,8 @@
         text: $scope.newQuestionText,
         date: timestamp.getTime(),
         answer: "",
-        status: "",
+        status: 0,
+        heart: 0,
       });
 
       $scope.newQuestionText = "";
@@ -31,7 +32,13 @@
     $scope.answerQuestion = function (question) {
       ref.child(question.$id).update({
         "answer": question.answer,
-        "status": "answered"
+        "status": 1
+      })
+    }
+
+    $scope.heartQuestion = function (question) {
+      ref.child(question.$id).update({
+        "heart": question.heart + 1,
       })
     }
 

@@ -1,6 +1,7 @@
 //Color
 $main: #ea4f1f;
-$secondary: rgba(255, 229, 222, .3);
+$secondary: #ffe9e3;
+$grey: #ACB6C2;
 //------------------------
 @import url(https://fonts.googleapis.com/css?family=Signika:400,300,600,700);
 //------------------------
@@ -42,7 +43,7 @@ h3 {
   position: fixed;
   z-index: 1;
   width: 100%;
-  height: 550px;
+  height: 650px;
   background-image: url(../img/bg.jpg);
   background-size: cover;
   background-position: top;
@@ -65,7 +66,7 @@ h3 {
 .ask-form {
   width: 50%;
   margin: auto;
-  background-color: rgba(255, 229, 222, .3);
+  background-color: rgba( $secondary, .5);
   border: 1px solid $main;
   border-radius: 2px;
   padding: 10px;
@@ -120,21 +121,29 @@ h3 {
   margin-bottom: 10px;
 }
 
+.answered {
+  background-color: $secondary;
+}
+
 .q {
   font-size: 18px;
   color: black;
   font-weight: 400;
 }
 
+.by,
 .date {
-  color: $main
+  display: inline-block;
+  color: $grey;
+  font-size: 13px;
 }
 
 .answer-form {
   margin-top: 5px;
-  background-color: $secondary;
-  width: 50%;
+  background-color: rgba( $secondary, .5);
+  width: 100%;
   padding: 3px 10px;
+  border-radius: 2px;
   input {
     border: none;
     background-color: transparent;
@@ -143,5 +152,31 @@ h3 {
   button {
     background-color: transparent;
     border: none;
+    color: $grey;
   }
+}
+
+.heart {
+  padding-left: 25px;
+  font-size: 18px;
+  color: $grey;
+  cursor: pointer;
+  a {
+    color: $grey;
+  }
+  &:hover {
+    a {
+      color: $main;
+    }
+  }
+}
+
+.active {
+  color: $main;
+}
+
+.heart-number {
+  margin-left: 5px;
+  font-size: 13px;
+  font-weight: 200;
 }
