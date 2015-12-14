@@ -1,9 +1,26 @@
 (function () {
 
   // Start App Module
-  var askAnything = angular.module("askAnything", ['firebase'
-  ]);
+  var askAnything = angular.module("askAnything", ['ui.router', 'firebase']);
 
+
+  //UI Router Config
+  askAnything.config(function ($stateProvider, $urlRouterProvider) {
+    //
+    // For any unmatched url, redirect to /state1
+    $urlRouterProvider.otherwise("/home");
+    //
+    // Now set up the states
+    $stateProvider
+      .state('log-in', {
+        url: "",
+        templateUrl: "templates/home.html"
+      })
+      .state('main', {
+        url: "/main",
+        templateUrl: "templates/main.html"
+      })
+  });
 
   //Firebase stuff starts here
 

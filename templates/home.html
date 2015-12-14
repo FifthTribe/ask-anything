@@ -1,7 +1,14 @@
-<div ng-controller='FirebaseCtrl'>
-
-  <h2>Before you can ask me anything, prove to me that you belong to the tribe!</h2>
-
-  <div class="question">This is a random question I haven't figured out.</div>
-
-</div>
+<section class="log-in">
+  <div class="container">
+    <img src="img/askanything.png">
+    <div class="add-question">
+      <form class="ask-form" name="myForm" ng-submit="addQuestion()">
+        <label>Username</label>
+        <input ng-model="newQuestionText" placeholder="Your Fifth Tribe email" />
+        <label>Password</label>
+        <input ng-model="newQuestionText" />
+        <button type="submit">Let me in</button>
+      </form>
+    </div>
+  </div>
+</section>
