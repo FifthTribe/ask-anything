@@ -2,11 +2,23 @@
   <div class="container">
     <img src="img/askanything.png">
     <div class="add-question">
-      <form class="ask-form" name="myForm" ng-submit="addQuestion()">
-        <label>Username</label>
-        <input ng-model="newQuestionText" placeholder="Your Fifth Tribe email" />
-        <label>Password</label>
-        <input ng-model="newQuestionText" />
+      <form class="login-form" name="myForm" ng-submit="addQuestion()">
+        <div class="row">
+          <div class="col-xs-1 col-xs-offset-1">
+            <label>Username</label>
+          </div>
+          <div class="col-xs-10">
+            <input ng-model="newQuestionText" placeholder="Your Fifth Tribe email" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-1 col-xs-offset-1">
+            <label>Password</label>
+          </div>
+          <div class="col-xs-10">
+            <input ng-model="newQuestionText" />
+          </div>
+        </div>
         <button type="submit">Let me in</button>
       </form>
     </div>
