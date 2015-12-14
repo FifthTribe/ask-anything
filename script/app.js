@@ -3,7 +3,7 @@
   // Start App Module
   var askAnything = angular.module("askAnything", ['ui.router', 'firebase']);
 
-
+  //---------------------------------------------------------
   //UI Router Config
   askAnything.config(function ($stateProvider, $urlRouterProvider) {
     //
@@ -22,9 +22,11 @@
       })
   });
 
-  //Firebase stuff starts here
+  //---------------------------------------------------------
 
+  //Firebase data
   askAnything.controller("FirebaseCtrl", function ($scope, $firebaseArray) {
+
     var ref = new Firebase("https://askanything.firebaseio.com/questions");
 
     // create a synchronized array
@@ -67,15 +69,3 @@
 function submitForm() {
   document.forms["myForm"].reset();
 };
-
-
-//Idenity question
-
-function verifyAnswer() {
-  var value = document.getElementById("verifyAnswer").value;
-  if (value == "Anh") {
-    window.location.href = 'main.html';
-  } else {
-    window.alert("try again");
-  }
-}

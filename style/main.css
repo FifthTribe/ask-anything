@@ -38,81 +38,34 @@ h3 {
   font-size: 18; }
 
 /* line 47, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
-.ask,
-.log-in {
-  position: fixed;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  background-image: url(../img/bg.jpg);
-  background-size: cover;
-  background-position: top;
-  text-align: center; }
-  /* line 56, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
-  .ask img,
-  .log-in img {
-    position: relative;
-    margin-top: 15%;
-    margin-bottom: 15px;
-    max-width: 400px; }
-  /* line 62, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
-  .ask .description,
-  .log-in .description {
-    font-size: 16px;
-    font-weight: 400;
-    color: grey;
-    margin-top: 10px;
-    margin-bottom: 10px; }
-
-/* line 71, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
-.ask-form {
-  width: 50%;
-  margin: auto;
-  background-color: rgba(255, 233, 227, 0.5);
-  border: 1px solid #ea4f1f;
-  border-radius: 2px;
-  padding: 10px;
-  font-size: 16px; }
-  /* line 79, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
-  .ask-form input {
-    border: none;
-    background-color: transparent;
-    width: 80%; }
-  /* line 84, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
-  .ask-form button {
-    font-weight: 600;
-    text-transform: uppercase;
-    background-color: transparent;
-    border: none;
-    color: #c1c1c1; }
-    /* line 90, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
-    .ask-form button:hover {
-      color: black; }
-
-/* line 96, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
 .login-form {
-  width: 50%;
+  width: 80%;
   margin: auto;
   background-color: rgba(255, 233, 227, 0.5);
   border: 1px solid #ea4f1f;
   border-radius: 2px;
   padding: 30px 0px;
   font-size: 16px; }
-  /* line 104, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  /* line 55, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
   .login-form .row {
     margin-bottom: 10px; }
-  /* line 107, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  /* line 58, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  .login-form .forgot {
+    margin-top: 10px;
+    cursor: pointer;
+    text-align: center;
+    display: block; }
+  /* line 64, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
   .login-form label {
     padding-top: 6px;
     font-weight: 400; }
-  /* line 111, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  /* line 68, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
   .login-form input {
     width: 80%;
-    margin-left: 15px;
-    border-bottom: 2px solid #ea4f1f;
-    background-color: transparent;
-    padding: 5px; }
-  /* line 118, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+    margin-left: 10px;
+    background-color: white;
+    padding: 5px 15px; }
+  /* line 74, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
   .login-form button {
     margin-top: 20px;
     font-weight: 600;
@@ -123,36 +76,115 @@ h3 {
     padding: 5px 15px;
     color: #ea4f1f;
     transition: all 0.2s ease; }
-    /* line 128, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+    /* line 84, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
     .login-form button:hover {
       background-color: #ea4f1f;
       color: white; }
 
-/* line 135, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+/* line 91, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+.login-box {
+  background-color: transparent;
+  padding: 15px 0 30px; }
+  /* line 94, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  .login-box h3 {
+    color: #ea4f1f;
+    padding-bottom: 10px; }
+
+/* line 100, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+.signup-box {
+  background-color: rgba(255, 255, 255, 0.4);
+  padding: 15px 0 30px; }
+  /* line 103, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  .signup-box h3 {
+    color: #ea4f1f;
+    padding-bottom: 10px; }
+
+/* line 109, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+.user-alert {
+  color: #ea4f1f;
+  font-weight: 500; }
+
+/* line 116, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+.ask,
+.log-in {
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-image: url(../img/bg.jpg);
+  background-size: cover;
+  background-position: top;
+  text-align: center; }
+  /* line 125, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  .ask img,
+  .log-in img {
+    position: relative;
+    margin-top: 15%;
+    margin-bottom: 15px;
+    max-width: 400px; }
+  /* line 131, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  .ask .description,
+  .log-in .description {
+    font-size: 16px;
+    font-weight: 400;
+    color: grey;
+    margin-top: 10px;
+    margin-bottom: 10px; }
+
+/* line 141, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+.log-in img {
+  margin-top: 12%; }
+
+/* line 146, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+.ask-form {
+  width: 50%;
+  margin: auto;
+  background-color: rgba(255, 233, 227, 0.5);
+  border: 1px solid #ea4f1f;
+  border-radius: 2px;
+  padding: 10px;
+  font-size: 16px; }
+  /* line 154, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  .ask-form input {
+    border: none;
+    background-color: transparent;
+    width: 80%; }
+  /* line 159, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  .ask-form button {
+    font-weight: 600;
+    text-transform: uppercase;
+    background-color: transparent;
+    border: none;
+    color: #c1c1c1; }
+    /* line 165, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+    .ask-form button:hover {
+      color: black; }
+
+/* line 171, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
 .up {
   padding: 10px 0;
   color: #ea4f1f;
   font-size: 30px;
   text-align: center; }
 
-/* line 142, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+/* line 178, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
 .question-list {
   position: relative;
   z-index: 100;
   top: 550px; }
 
-/* line 148, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+/* line 184, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
 .recent {
   background-color: #ea4f1f;
   padding-top: 30px;
   padding-bottom: 50px; }
-  /* line 152, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  /* line 188, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
   .recent h2 {
     text-align: center;
     color: white;
     margin-bottom: 30px; }
 
-/* line 160, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+/* line 196, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
 .questions {
   background-color: white;
   padding: 15px 15px;
@@ -160,78 +192,78 @@ h3 {
   border-radius: 2px;
   margin-bottom: 10px; }
 
-/* line 168, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+/* line 204, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
 .answered {
   background-color: #ffe9e3; }
 
-/* line 172, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+/* line 208, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
 .q {
   font-size: 18px;
   color: black;
   font-weight: 400; }
 
-/* line 179, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+/* line 215, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
 .by,
 .date {
   display: inline-block;
   color: #ACB6C2;
   font-size: 13px; }
 
-/* line 185, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+/* line 221, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
 .answer-form {
   margin-top: 5px;
   background-color: rgba(255, 233, 227, 0.5);
   width: 100%;
   padding: 3px 10px;
   border-radius: 2px; }
-  /* line 191, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  /* line 227, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
   .answer-form input {
     border: none;
     background-color: transparent;
     width: 85%; }
-  /* line 196, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  /* line 232, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
   .answer-form button {
     background-color: transparent;
     border: none;
     color: #ACB6C2; }
 
-/* line 203, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+/* line 239, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
 .heart {
   padding-left: 25px;
   font-size: 18px;
   color: #ACB6C2;
   cursor: pointer; }
-  /* line 208, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  /* line 244, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
   .heart a {
     color: #ACB6C2; }
-  /* line 212, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  /* line 248, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
   .heart:hover a {
     color: #ea4f1f; }
 
-/* line 218, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+/* line 254, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
 .active {
   color: #ea4f1f; }
 
-/* line 222, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+/* line 258, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
 .heart-number {
   margin-left: 5px;
   font-size: 13px;
   font-weight: 200; }
 
 @media (max-width: 786px) {
-  /* line 230, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  /* line 266, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
   .ask img {
     max-width: 300px; }
-  /* line 235, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  /* line 271, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
   .ask-form imput {
     width: 80%; }
-  /* line 238, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  /* line 274, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
   .ask-form button {
     display: none; }
-  /* line 242, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  /* line 278, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
   .question-list {
     top: 250px; }
-  /* line 246, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  /* line 282, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
   answer-form button {
     display: none; } }
 
