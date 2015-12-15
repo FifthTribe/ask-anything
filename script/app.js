@@ -1,26 +1,87 @@
 (function () {
 
   // Start App Module
-  var askAnything = angular.module("askAnything", ['ui.router', 'firebase']);
+  var askAnything = angular.module("askAnything", ['ngRoute', 'firebase']);
 
   //---------------------------------------------------------
   //UI Router Config
-  askAnything.config(function ($stateProvider, $urlRouterProvider) {
-    //
-    // For any unmatched url, redirect to /state1
-    $urlRouterProvider.otherwise("/home");
-    //
-    // Now set up the states
-    $stateProvider
-      .state('log-in', {
-        url: "",
-        templateUrl: "templates/home.html"
-      })
-      .state('main', {
-        url: "/main",
-        templateUrl: "templates/main.html"
-      })
+  askAnything.config(['$routeProvider',
+  function ($routeProvider) {
+      $routeProvider.
+      when('/', {
+        templateUrl: 'templates/home.html',
+        controller: 'FirebaseCtrl'
+      }).
+      when('/main', {
+        templateUrl: 'templates/main.html',
+        controller: 'FirebaseCtrl'
+      }).
+      otherwise({
+        redirectTo: '/'
+      });
+  }]);
+
+  //---------------------------------------------------------
+  askAnything.controller("FirebaseUser", function ($scope, $firebaseArray, $location) {
+
+    var userRef = new Firebase("https://askanything.firebaseio.com");
+
+    $scope.user = "";
+    $scope.password = "";
+    $scope.confirm = "";
+    $scope.userName = "";
+    $scope.alert = "";
+    $scope.userLogin = "";
+    $scope.passwordLogin = "";
+    $scope.loginAlert = "";
+
+
+
+
+    //    Create Account
+    $scope.createUser = function () {
+      //If email match @fifthtribe
+      if ($scope.user.indexOf("@fifthtribe.com") == -1) {
+
+        //If email not matching @fifthtribe
+        $scope.alert = "Not a Fifth Tribe email address.";
+      } else if ($scope.password != $scope.confirm) {
+        //If email not matching @fifthtribe
+        $scope.alert = "Password doesn't match.";
+      } else {
+        //Create an account
+        userRef.createUser({
+          email: $scope.user,
+          password: $scope.password,
+          name: $scope.userName,
+        }, function (error, userData) {
+          if (error) {
+            $scope.alert = "Error creating user:", error;
+          } else {
+            console.log("Successfully create acount " + $scope.userName);
+            $location.path("/main");
+          }
+        });
+      }
+    }
+
+    //     Log-in    
+    $scope.loginUser = function () {
+      userRef.authWithPassword({
+        email: $scope.userLogin,
+        password: $scope.passwordLogin,
+      }, function (error, authData) {
+        if (error) {
+          console.log("Login fail");
+          $scope.loginAlert = "Invalid username and/or password";
+        } else {
+          $location.path("/main");
+        }
+      });
+    }
+
   });
+
 
   //---------------------------------------------------------
 

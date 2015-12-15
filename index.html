@@ -10,7 +10,7 @@
   <!-- AngularJS -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
   <!-- UI Router -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+  <script src="/bower_components/angular-route/angular-route.js"></script>
   <!-- Firebase -->
   <script src="https://cdn.firebase.com/js/client/2.2.2/firebase.js"></script>
   <!-- AngularFire -->
@@ -21,9 +21,7 @@
 
 <body>
   <div class="app">
-    <div ng-controller='FirebaseCtrl'>
-      <div ui-view></div>
-    </div>
+    <div ng-view></div>
 
   </div>
 </body>
