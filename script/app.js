@@ -27,7 +27,7 @@
 
   //FIREBASE --------------------
 
-  askAnything.controller("FirebaseCtrl", function ($scope, $firebaseArray, $location) {
+  askAnything.controller("FirebaseCtrl", function ($scope, $firebaseArray, $location, $timeout) {
 
     var userRef = new Firebase("https://askanything.firebaseio.com");
     var ref = new Firebase("https://askanything.firebaseio.com/questions");
@@ -95,11 +95,29 @@
           console.log("Login fail " + error);
           $scope.alert = "Invalid username and/or password";
         } else {
+          $timeout(function () {
+            $location.path("/main");
+          }, 0);
+
           console.log("Login sucess");
           //Route to main if login success
-          $location.path("/main");
         }
       });
+    }
+
+    //REDIRECT FROM MAIN TO INDEX IF LOGGED OUT
+    var authData = userRef.getAuth();
+    if (authData) {
+      console.log("User " + authData.uid + " is logged in with " + authData.provider);
+    } else {
+      console.log("User is logged out");
+      $location.path("/");
+    }
+
+    //LOG-OUT    
+    $scope.logoutUser = function () {
+      userRef.unauth();
+      $location.path("/");
     }
 
     //ADDING QUESTION LOGIC//-----------
@@ -141,18 +159,6 @@
 
   //Monitoring User Authentication State//-----------
 
-  //  Re-direct user to index if they're not logged in
-  askAnything.controller("LoggedOut", function ($scope, $firebaseArray, $location) {
-    var stateRef = new Firebase("https://askanything.firebaseio.com");
-
-    var authData = stateRef.getAuth();
-    if (authData) {
-      console.log("User " + authData.uid + " is logged in with " + authData.provider);
-    } else {
-      console.log("User is logged out");
-      $location.path("/");
-    }
-  });
 
   //  Automatically take user to main if they're logged in
   askAnything.controller("LoggedIn", function ($scope, $firebaseArray, $location) {

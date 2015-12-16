@@ -69,6 +69,21 @@ h3 {
   }
 }
 
+.header {
+  padding-top: 15px;
+  button {
+    display: inline;
+    float: right;
+    font-weight: 500;
+    color: $grey;
+    border: none;
+    background-color: transparent;
+    &:hover {
+      color: $main;
+    }
+  }
+}
+
 //LOG-IN
 .box {
   background-color: rgba( $secondary, .5);
