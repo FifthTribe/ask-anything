@@ -72,7 +72,7 @@
               password: $scope.password,
             }, function (error, authData) {
               if (error) {
-                console.log("Login fail" + error);
+                console.log("Login fail " + error);
               } else {
                 console.log("Login sucess");
               }
@@ -88,13 +88,15 @@
     //     Log-in    
     $scope.loginUser = function () {
       userRef.authWithPassword({
-        email: $scope.userLogin,
-        password: $scope.passwordLogin,
+        email: $scope.user,
+        password: $scope.password,
       }, function (error, authData) {
         if (error) {
-          console.log("Login fail");
-          $scope.loginAlert = "Invalid username and/or password";
+          console.log("Login fail " + error);
+          $scope.alert = "Invalid username and/or password";
         } else {
+          console.log("Login sucess");
+          //Route to main if login success
           $location.path("/main");
         }
       });
