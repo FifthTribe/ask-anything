@@ -3,17 +3,21 @@
   // Start App Module
   var askAnything = angular.module("askAnything", ['ngRoute', 'firebase']);
 
-  //---------------------------------------------------------
-  //UI Router Config
+  //NG-ROUTE CONFIGURATION -------------------- 
+
   askAnything.config(['$routeProvider',
   function ($routeProvider) {
       $routeProvider.
       when('/', {
-        templateUrl: 'templates/home.html',
+        templateUrl: 'templates/index.html',
         controller: 'FirebaseCtrl'
       }).
       when('/main', {
         templateUrl: 'templates/main.html',
+        controller: 'FirebaseCtrl'
+      }).
+      when('/signup', {
+        templateUrl: 'templates/signup.html',
         controller: 'FirebaseCtrl'
       }).
       otherwise({
@@ -21,12 +25,14 @@
       });
   }]);
 
-  //---------------------------------------------------------
+  //FIREBASE --------------------
 
-  //Firebase data
   askAnything.controller("FirebaseCtrl", function ($scope, $firebaseArray, $location) {
 
     var userRef = new Firebase("https://askanything.firebaseio.com");
+    var ref = new Firebase("https://askanything.firebaseio.com/questions");
+
+    //USER AUTHENTICATION STARTS HERE//-----------
 
     $scope.user = "";
     $scope.password = "";
@@ -38,20 +44,19 @@
     $scope.loginAlert = "";
 
 
-
-
-    //    Create Account
+    //SIGN UP
     $scope.createUser = function () {
-      //If email match @fifthtribe
-      if ($scope.user.indexOf("@fifthtribe.com") == -1) {
 
-        //If email not matching @fifthtribe
+      //Check if email matching @fifthtribe.com
+      if ($scope.user.indexOf("@fifthtribe.com") == -1) {
         $scope.alert = "Not a Fifth Tribe email address.";
+
+        //Check if password confirm match
       } else if ($scope.password != $scope.confirm) {
-        //If email not matching @fifthtribe
         $scope.alert = "Password doesn't match.";
+
+        //If everything passes, create an account
       } else {
-        //Create an account
         userRef.createUser({
           email: $scope.user,
           password: $scope.password,
@@ -61,10 +66,23 @@
             $scope.alert = "Error creating user:", error;
           } else {
             console.log("Successfully create acount " + $scope.userName);
-            $location.path("/main");
+            //Then log user in
+            userRef.authWithPassword({
+              email: $scope.user,
+              password: $scope.password,
+            }, function (error, authData) {
+              if (error) {
+                console.log("Login fail" + error);
+              } else {
+                console.log("Login sucess");
+              }
+            });
           }
         });
+        //Then route to main
+        $location.path("/main");
       }
+
     }
 
     //     Log-in    
@@ -82,7 +100,7 @@
       });
     }
 
-    var ref = new Firebase("https://askanything.firebaseio.com/questions");
+    //MAIN DATA STARTS HERE//-----------
 
     // create a synchronized array
     $scope.questions = $firebaseArray(ref);
