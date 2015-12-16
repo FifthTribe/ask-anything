@@ -1,94 +1,97 @@
-<section class="home">
-  <div class="container">
-    <img src="img/askanything.png">
-    <div class="description">You can ask literally anything.</div>
-    <div class="add-question">
-      <form class="ask-form" name="myForm" ng-submit="addQuestion()">
-        <input ng-model="newQuestionText" placeholder="What do you want to know?" />
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-  </div>
-</section>
-
-
-<!--      List of question-->
-<section class="question-list">
-  <div class="up"><i class="fa fa-arrow-circle-o-up"></i></i>
-  </div>
-  <div class="recent">
+<div ng-controller="LoggedOut">
+  <!--  Question Input-->
+  <section class="home">
     <div class="container">
+      <img src="img/askanything.png">
+      <div class="description">You can ask literally anything.</div>
+      <div class="add-question">
+        <form class="ask-form" name="myForm" ng-submit="addQuestion()">
+          <input ng-model="newQuestionText" placeholder="What do you want to know?" />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </section>
 
-      <div class="row">
-        <div class="col-md-6">
-          <h2>Recently asked</h2>
-          <!-- Unanswered-->
-          <div class="questions" ng-repeat="question in questions | filter: { status: 0 } | orderBy:'-date'">
-            <div class="row">
-              <div class="col-md-10 ">
-                <div class="by">John Doe</div>
-                <div class="date "> • {{question.date | date:'MM.dd.yyyy'}}</div>
-                <div class="q ">{{question.text}}</div>
 
-                <!-- Answer input-->
-                <form class="answer-form" ng-submit="answerQuestion(question)">
-                  <input ng-model="question.answer" placeholder="You have the answer? " />
-                  <button type="submit">Submit</button>
-                </form>
+  <!--      List of question-->
+  <section class="question-list">
+    <div class="up"><i class="fa fa-arrow-circle-o-up"></i></i>
+    </div>
+    <div class="recent">
+      <div class="container">
 
+        <div class="row">
+          <div class="col-md-6">
+            <h2>Recently asked</h2>
+            <!-- Unanswered-->
+            <div class="questions" ng-repeat="question in questions | filter: { status: 0 } | orderBy:'-date'">
+              <div class="row">
+                <div class="col-md-10 ">
+                  <div class="by">John Doe</div>
+                  <div class="date "> • {{question.date | date:'MM.dd.yyyy'}}</div>
+                  <div class="q ">{{question.text}}</div>
+
+                  <!-- Answer input-->
+                  <form class="answer-form" ng-submit="answerQuestion(question)">
+                    <input ng-model="question.answer" placeholder="You have the answer? " />
+                    <button type="submit">Submit</button>
+                  </form>
+
+                </div>
+                <div class="col-md-2">
+                  <div class="heart"><a ng-click="heartQuestion(question)"><i class="fa fa-heart-o "></a></i><span class="heart-number">{{question.heart}}</span>
+                  </div>
+                </div>
               </div>
-              <div class="col-md-2">
-                <div class="heart"><a ng-click="heartQuestion(question)"><i class="fa fa-heart-o "></a></i><span class="heart-number">{{question.heart}}</span>
+            </div>
+
+
+            <!-- Answered-->
+            <div class="questions" ng-repeat="question in questions | filter: { status: 1 }| orderBy:'-date' | limitTo : 20">
+              <div class="row">
+                <div class="col-md-10 ">
+                  <div class="by">John Doe</div>
+                  <div class="date "> • {{question.date | date:'MM.dd.yyyy'}}</div>
+                  <div class="q ">{{question.text}}</div>
+
+                  <!-- Anwser-->
+                  <div class="answer">
+                    {{question.answer}}
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="heart"><a ng-click="heartQuestion(question)"><i class="fa fa-heart-o "></a></i><span class="heart-number">{{question.heart}}</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
+          <!--Favorites-->
+          <div class="col-md-6">
+            <h2>Favorites</h2>
+            <div class="questions" ng-repeat="question in questions | orderBy:'-heart' | limitTo : 10" ng-hide="question.heart < 5">
+              <div class="row">
+                <div class="col-md-10 ">
+                  <div class="by">John Doe</div>
+                  <div class="date"> • {{question.date | date:'MM.dd.yyyy'}}</div>
+                  <div class="q ">{{question.text}}</div>
 
-          <!-- Answered-->
-          <div class="questions" ng-repeat="question in questions | filter: { status: 1 }| orderBy:'-date' | limitTo : 20">
-            <div class="row">
-              <div class="col-md-10 ">
-                <div class="by">John Doe</div>
-                <div class="date "> • {{question.date | date:'MM.dd.yyyy'}}</div>
-                <div class="q ">{{question.text}}</div>
+                  <!-- Answer input-->
+                  <form class="answer-form" ng-submit="answerQuestion(question)" ng-hide="question.status == 1">
+                    <input ng-model="question.answer" placeholder="You have the answer? " />
+                    <button type="submit">Submit</button>
+                  </form>
 
-                <!-- Anwser-->
-                <div class="answer">
-                  {{question.answer}}
+                  <!-- Anwser-->
+                  <div class="answer" ng-show="question.status == 1">
+                    {{question.answer}}
+                  </div>
                 </div>
-              </div>
-              <div class="col-md-2">
-                <div class="heart"><a ng-click="heartQuestion(question)"><i class="fa fa-heart-o "></a></i><span class="heart-number">{{question.heart}}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!--Favorites-->
-        <div class="col-md-6">
-          <h2>Favorites</h2>
-          <div class="questions" ng-repeat="question in questions | orderBy:'-heart' | limitTo : 10" ng-hide="question.heart < 5">
-            <div class="row">
-              <div class="col-md-10 ">
-                <div class="by">John Doe</div>
-                <div class="date"> • {{question.date | date:'MM.dd.yyyy'}}</div>
-                <div class="q ">{{question.text}}</div>
-
-                <!-- Answer input-->
-                <form class="answer-form" ng-submit="answerQuestion(question)" ng-hide="question.status == 1">
-                  <input ng-model="question.answer" placeholder="You have the answer? " />
-                  <button type="submit">Submit</button>
-                </form>
-
-                <!-- Anwser-->
-                <div class="answer" ng-show="question.status == 1">
-                  {{question.answer}}
-                </div>
-              </div>
-              <div class="col-md-2">
-                <div class="heart"><a ng-click="heartQuestion(question)()"><i class="fa fa-heart-o "></a></i><span class="heart-number">{{question.heart}}</span>
+                <div class="col-md-2">
+                  <div class="heart"><a ng-click="heartQuestion(question)()"><i class="fa fa-heart-o "></a></i><span class="heart-number">{{question.heart}}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -96,5 +99,5 @@
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+  askAnything.controller("FirebaseCtrl", function ($scope, $firebaseArray, $location) {

@@ -85,7 +85,7 @@
 
     }
 
-    //     Log-in    
+    //LOG-IN    
     $scope.loginUser = function () {
       userRef.authWithPassword({
         email: $scope.user,
@@ -102,12 +102,12 @@
       });
     }
 
-    //MAIN DATA STARTS HERE//-----------
+    //ADDING QUESTION LOGIC//-----------
 
-    // create a synchronized array
+    // Create a synchronized array
     $scope.questions = $firebaseArray(ref);
 
-    // add new question
+    // Add new question
     $scope.addQuestion = function () {
       var timestamp = new Date();
       $scope.questions.$add({
@@ -122,7 +122,7 @@
 
     };
 
-
+    // Edit answer
     $scope.answerQuestion = function (question) {
       ref.child(question.$id).update({
         "answer": question.answer,
@@ -130,12 +130,41 @@
       })
     }
 
+    // Add hearts
     $scope.heartQuestion = function (question) {
       ref.child(question.$id).update({
         "heart": question.heart + 1,
       })
     }
 
+  });
+
+  //Monitoring User Authentication State//-----------
+
+  //  Re-direct user to index if they're not logged in
+  askAnything.controller("LoggedOut", function ($scope, $firebaseArray, $location) {
+    var stateRef = new Firebase("https://askanything.firebaseio.com");
+
+    var authData = stateRef.getAuth();
+    if (authData) {
+      console.log("User " + authData.uid + " is logged in with " + authData.provider);
+    } else {
+      console.log("User is logged out");
+      $location.path("/");
+    }
+  });
+
+  //  Automatically take user to main if they're logged in
+  askAnything.controller("LoggedIn", function ($scope, $firebaseArray, $location) {
+    var stateRef = new Firebase("https://askanything.firebaseio.com");
+
+    var authData = stateRef.getAuth();
+    if (authData) {
+      console.log("User " + authData.uid + " is logged in with " + authData.provider);
+      $location.path("/main");
+    } else {
+      console.log("User is logged out");
+    }
   });
 
 })();
