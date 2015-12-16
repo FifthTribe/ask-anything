@@ -25,7 +25,7 @@
       });
   }]);
 
-  //FIREBASE --------------------
+  //FIREBASE CONTROLLER--------------------
 
   askAnything.controller("FirebaseCtrl", function ($scope, $firebaseArray, $location, $timeout) {
 
@@ -105,15 +105,6 @@
       });
     }
 
-    //REDIRECT FROM MAIN TO INDEX IF LOGGED OUT
-    var authData = userRef.getAuth();
-    if (authData) {
-      console.log("User " + authData.uid + " is logged in with " + authData.provider);
-    } else {
-      console.log("User is logged out");
-      $location.path("/");
-    }
-
     //LOG-OUT    
     $scope.logoutUser = function () {
       userRef.unauth();
@@ -157,21 +148,34 @@
 
   });
 
-  //Monitoring User Authentication State//-----------
+  //STATE MONITORING CONTROLLERS--------------------
 
+  askAnything.controller("redirect", function ($scope, $firebaseArray, $location, $timeout) {
 
-  //  Automatically take user to main if they're logged in
-  askAnything.controller("LoggedIn", function ($scope, $firebaseArray, $location) {
-    var stateRef = new Firebase("https://askanything.firebaseio.com");
+    var userState = new Firebase("https://askanything.firebaseio.com");
+    //REDIRECT FROM MAIN TO INDEX IF LOGGED OUT
+    var authData = userState.getAuth();
+    if (authData) {
+      console.log("User " + authData.uid + " is logged in with " + authData.provider);
+    } else {
+      console.log("User is logged out");
+      $location.path("/");
+    }
+  })
 
-    var authData = stateRef.getAuth();
+  askAnything.controller("loggedInRedirect", function ($scope, $firebaseArray, $location, $timeout) {
+
+    var userState = new Firebase("https://askanything.firebaseio.com");
+    //REDIRECT FROM INDEX TO MAIN IF LOGGED IN
+    var authData = userState.getAuth();
     if (authData) {
       console.log("User " + authData.uid + " is logged in with " + authData.provider);
       $location.path("/main");
     } else {
       console.log("User is logged out");
     }
-  });
+  })
+
 
 })();
 
