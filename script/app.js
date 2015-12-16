@@ -22,7 +22,9 @@
   }]);
 
   //---------------------------------------------------------
-  askAnything.controller("FirebaseUser", function ($scope, $firebaseArray, $location) {
+
+  //Firebase data
+  askAnything.controller("FirebaseCtrl", function ($scope, $firebaseArray, $location) {
 
     var userRef = new Firebase("https://askanything.firebaseio.com");
 
@@ -79,14 +81,6 @@
         }
       });
     }
-
-  });
-
-
-  //---------------------------------------------------------
-
-  //Firebase data
-  askAnything.controller("FirebaseCtrl", function ($scope, $firebaseArray) {
 
     var ref = new Firebase("https://askanything.firebaseio.com/questions");
 

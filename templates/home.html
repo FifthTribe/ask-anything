@@ -1,36 +1,38 @@
-<section class="log-in">
-  <div ng-controller='FirebaseUser'>
-    <div class="container">
+<section class="home">
+  <div class="container">
+    <div class="col-md-12">
       <img src="img/askanything.png">
-      <div class="row login-form">
+    </div>
+    <div class="col-md-6 col-md-offset-3 box">
 
-        <!--        LOG-IN-->
-        <form class="col-md-6" name="myForm" ng-submit="loginUser()">
-          <div class="login-box">
-            <h3>Log-in</h3>
-            <div class="row">
-              <div class="col-xs-1 col-xs-offset-1">
-                <label>Email</label>
-              </div>
-              <div class="col-xs-10">
-                <input ng-model="userLogin" placeholder="Your Fifth Tribe email" />
-              </div>
+      <!--        LOG-IN-->
+      <form name="myForm" ng-submit="loginUser()">
+        <div class="login-box">
+          <h3>Log-in</h3>
+          <div class="row">
+            <div class="col-xs-1 col-xs-offset-1">
+              <label>Email</label>
             </div>
-            <div class="row">
-              <div class="col-xs-1 col-xs-offset-1">
-                <label>Password</label>
-              </div>
-              <div class="col-xs-10">
-                <input ng-model="passwordLogin" type="password" />
-              </div>
+            <div class="col-xs-10">
+              <input ng-model="userLogin" placeholder="Your Fifth Tribe email" />
             </div>
-            <p class="user-alert">{{loginAlert}}</p>
-            <button type="submit">Let me in</button>
-            <a class="forgot">Forgot your password?</a>
           </div>
-        </form>
+          <div class="row">
+            <div class="col-xs-1 col-xs-offset-1">
+              <label>Password</label>
+            </div>
+            <div class="col-xs-10">
+              <input ng-model="passwordLogin" type="password" />
+            </div>
+          </div>
+          <p class="user-alert">{{loginAlert}}</p>
+          <button type="submit">Let me in</button>
+          <div class="links"><a class="forgot">Forgot your password?</a><span style="padding-left: 8px;padding-right: 5px">|</span><a class="forgot">Create an account</a></div>
+        </div>
+      </form>
 
-        <!--        CREATE ACOUNT-->
+      <!--        CREATE ACOUNT-->
+      <!--
         <form class="col-md-6" name="myForm" ng-submit="createUser()">
           <div class="signup-box">
             <h3>Create an account</h3>
@@ -72,8 +74,8 @@
             <button type="submit">Join</button>
           </div>
         </form>
+-->
 
-      </div>
     </div>
   </div>
 </section>

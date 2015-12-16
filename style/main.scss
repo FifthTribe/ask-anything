@@ -9,6 +9,9 @@ body {
   font-family: "Signika", sans-serif;
   font-size: 14px;
   font-weight: 300;
+  background-image: url(../img/bg.jpg);
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 textarea:focus,
@@ -18,6 +21,7 @@ input:focus {
 
 input {
   border: none;
+  color: transparent;
 }
 
 p,
@@ -43,15 +47,39 @@ h3 {
   font-size: 18;
 }
 
+//HOME
+.home {
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  img {
+    position: relative;
+    margin-top: 15%;
+    margin-bottom: 15px;
+    max-width: 400px;
+  }
+  .description {
+    font-size: 16px;
+    font-weight: 400;
+    color: grey;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
 //LOG-IN
-.login-form {
-  width: 80%;
-  margin: auto;
+.box {
   background-color: rgba( $secondary, .5);
   border: 1px solid $main;
   border-radius: 2px;
-  padding: 30px 0px;
   font-size: 16px;
+  padding-bottom: 30px;
+  h3 {
+    color: $main;
+    padding-bottom: 10px;
+  }
   .row {
     margin-bottom: 10px;
   }
@@ -59,7 +87,6 @@ h3 {
     margin-top: 10px;
     cursor: pointer;
     text-align: center;
-    display: block;
   }
   label {
     padding-top: 6px;
@@ -86,55 +113,14 @@ h3 {
       color: white;
     }
   }
-}
-
-.login-box {
-  background-color: transparent;
-  padding: 15px 0 30px;
-  h3 {
-    color: $main;
-    padding-bottom: 10px;
-  }
-}
-
-.signup-box {
-  background-color: rgba(255, 255, 255, .4);
-  padding: 15px 0 30px;
-  h3 {
-    color: $main;
-    padding-bottom: 10px;
+  a {
+    display: inline-block;
   }
 }
 
 .user-alert {
   color: $main;
   font-weight: 500;
-}
-
-//ASK
-.ask,
-.log-in {
-  position: fixed;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  background-image: url(../img/bg.jpg);
-  background-size: cover;
-  background-position: top;
-  text-align: center;
-  img {
-    position: relative;
-    margin-top: 15%;
-    margin-bottom: 15px;
-    max-width: 400px;
-  }
-  .description {
-    font-size: 16px;
-    font-weight: 400;
-    color: grey;
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
 }
 
 .log-in {
