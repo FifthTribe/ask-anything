@@ -31,6 +31,8 @@
 
     var userRef = new Firebase("https://askanything.firebaseio.com");
     var ref = new Firebase("https://askanything.firebaseio.com/questions");
+    var userProfile = new Firebase("https://askanything.firebaseio.com/users");
+
 
     //USER AUTHENTICATION STARTS HERE//-----------
 
@@ -75,12 +77,25 @@
                 console.log("Login fail " + error);
               } else {
                 console.log("Login sucess");
+                //Then route to main
+                $timeout(function () {
+                  $location.path("/main");
+                }, 0);
+                //Then store user custom
+                var isNewUser = true;
+                userRef.onAuth(function (authData) {
+                  if (authData && isNewUser) {
+                    userRef.child("users").child(authData.uid).set({
+                      provider: authData.provider,
+                      name: $scope.userName
+                    });
+
+                  }
+                });
               }
             });
           }
         });
-        //Then route to main
-        $location.path("/main");
       }
 
     }
@@ -98,9 +113,8 @@
           $timeout(function () {
             $location.path("/main");
           }, 0);
-
           console.log("Login sucess");
-          //Route to main if login success
+
         }
       });
     }
@@ -110,6 +124,23 @@
       userRef.unauth();
       $location.path("/");
     }
+
+    //REDIRECT DEPENDS ON LOG IN/OUT STATE
+    var authData = userRef.getAuth();
+    var currentPath = $location.path();
+
+    if (authData) {
+      console.log("User " + authData.uid + " is logged in with " + authData.provider);
+      if (currentPath == "/") {
+        $location.path("/main");
+      } else {};
+    } else {
+      console.log("User is logged out");
+      if (currentPath == "/main") {
+        $location.path("/");
+      } else {}
+    }
+
 
     //ADDING QUESTION LOGIC//-----------
 
@@ -146,37 +177,13 @@
       })
     }
 
+
+    /*  
+    userProfile.once("value", function (snapshot) {
+      console.log("Looking at snapshot");
+      console.log(snapshot.val());
+    });*/
   });
-
-  //STATE MONITORING CONTROLLERS--------------------
-
-  askAnything.controller("loggedOutRedirect", function ($scope, $firebaseArray, $location, $timeout) {
-
-    var userState = new Firebase("https://askanything.firebaseio.com");
-    //REDIRECT FROM MAIN TO INDEX IF LOGGED OUT
-    var authData = userState.getAuth();
-    if (authData) {
-      console.log("User " + authData.uid + " is logged in with " + authData.provider);
-    } else {
-      console.log("User is logged out");
-      $location.path("/");
-    }
-  })
-
-  askAnything.controller("loggedInRedirect", function ($scope, $firebaseArray, $location, $timeout) {
-
-    var userState = new Firebase("https://askanything.firebaseio.com");
-    //REDIRECT FROM INDEX TO MAIN IF LOGGED IN
-    var authData = userState.getAuth();
-    if (authData) {
-      console.log("User " + authData.uid + " is logged in with " + authData.provider);
-      $location.path("/main");
-    } else {
-      console.log("User is logged out");
-    }
-  })
-
-
 })();
 
 //Clear form after submit
