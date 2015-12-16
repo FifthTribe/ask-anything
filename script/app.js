@@ -3,7 +3,7 @@
   // Start App Module
   var askAnything = angular.module("askAnything", ['ngRoute', 'firebase']);
 
-  //NG-ROUTE CONFIGURATION -------------------- 
+  //VIEW CONFIGURATION -------------------- 
 
   askAnything.config(['$routeProvider',
   function ($routeProvider) {
@@ -41,9 +41,6 @@
     $scope.confirm = "";
     $scope.userName = "";
     $scope.alert = "";
-    $scope.userLogin = "";
-    $scope.passwordLogin = "";
-    $scope.loginAlert = "";
 
 
     //SIGN UP
@@ -68,6 +65,7 @@
             $scope.alert = "Error creating user:", error;
           } else {
             console.log("Successfully create acount " + $scope.userName);
+
             //Then log user in
             userRef.authWithPassword({
               email: $scope.user,
@@ -77,10 +75,12 @@
                 console.log("Login fail " + error);
               } else {
                 console.log("Login sucess");
+
                 //Then route to main
                 $timeout(function () {
                   $location.path("/main");
                 }, 0);
+
                 //Then store user custom
                 var isNewUser = true;
                 userRef.onAuth(function (authData) {
@@ -146,6 +146,7 @@
 
     // Create a synchronized array
     $scope.questions = $firebaseArray(ref);
+    $scope.users = $firebaseArray(userProfile);
 
     // Add new question
     $scope.addQuestion = function () {
@@ -153,19 +154,21 @@
       $scope.questions.$add({
         text: $scope.newQuestionText,
         date: timestamp.getTime(),
+        author: "",
         answer: "",
+        answerBy: "",
         status: 0,
         heart: 0,
       });
 
       $scope.newQuestionText = "";
-
     };
 
     // Edit answer
     $scope.answerQuestion = function (question) {
       ref.child(question.$id).update({
         "answer": question.answer,
+        answerBy: authData.uid,
         "status": 1
       })
     }
@@ -177,12 +180,6 @@
       })
     }
 
-
-    /*  
-    userProfile.once("value", function (snapshot) {
-      console.log("Looking at snapshot");
-      console.log(snapshot.val());
-    });*/
   });
 })();
 
