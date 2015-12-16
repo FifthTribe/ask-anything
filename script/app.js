@@ -150,7 +150,7 @@
 
   //STATE MONITORING CONTROLLERS--------------------
 
-  askAnything.controller("redirect", function ($scope, $firebaseArray, $location, $timeout) {
+  askAnything.controller("loggedOutRedirect", function ($scope, $firebaseArray, $location, $timeout) {
 
     var userState = new Firebase("https://askanything.firebaseio.com");
     //REDIRECT FROM MAIN TO INDEX IF LOGGED OUT
