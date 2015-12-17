@@ -73,9 +73,17 @@ h3 {
 
 .header {
   padding-top: 15px;
-  button {
-    display: inline;
+  .user-control {
     float: right;
+  }
+  a {
+    display: inline-block;
+    color: $main;
+    border: none;
+    margin-right: 10px;
+  }
+  button {
+    display: inline-block;
     font-weight: 500;
     color: $grey;
     border: none;

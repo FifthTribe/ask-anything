@@ -130,7 +130,22 @@
     var currentPath = $location.path();
 
     if (authData) {
-      console.log("User " + authData.uid + " is logged in with " + authData.provider);
+      console.log("User is logged in");
+      // Find username
+      userProfile.on("value", function (snapshot) {
+          var userListObject = snapshot.val();
+          var userListArray = [];
+          var currentID = authData.uid;
+          for (var prop in userListObject) {
+            if (currentID == prop) {
+              $scope.loggedInUser = userListObject[prop].name;
+              console.log($scope.loggedInUser);
+            }
+          }
+        },
+        function (errorObject) {
+          console.log("The read failed: " + errorObject.code);
+        });
       if (currentPath == "/") {
         $location.path("/main");
       } else {};
@@ -139,25 +154,6 @@
       if (currentPath == "/main") {
         $location.path("/");
       } else {}
-    }
-
-    // Find username
-    $scope.listUser = function () {
-      userProfile.on("value", function (snapshot) {
-          var userListObject = snapshot.val();
-          var userListArray = [];
-          var currentID = authData.uid;
-          console.log(Object.keys(userListObject));
-          console.log(userListObject);
-          for (var prop in userListObject) {
-            if (currentID == prop) {
-              $scope.loggedInUser = userListObject[prop].name;
-            }
-          }
-        },
-        function (errorObject) {
-          console.log("The read failed: " + errorObject.code);
-        });
     }
 
     //ADDING QUESTION LOGIC//-----------

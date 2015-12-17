@@ -2,9 +2,9 @@
 <section class="home">
   <div class="container">
     <div class="header">
-      <button class="sign-out" ng-click="logoutUser()">Sign out</button>
-      <div class="header">
-        <button class="sign-out" ng-click="listUser()">Check</button>
+      <div class="user-control">
+        <a>{{loggedInUser}}</a>
+        <button class="sign-out" ng-click="logoutUser()">Sign out</button>
       </div>
       <div class="row askanything">
         <div class="col-md-4 col-md-offset-4">
@@ -106,11 +106,10 @@
                 </form>
 
                 <!-- Anwser-->
-                <div class="answer-field">
-                  <div class="answered-by">{{question.answerBy}}</div>
-                  <div class="answer">
-                    {{question.answer}}
-                  </div>
+                <div class="answer-field" ng-repeat="answer in question.answers">
+                  <div class="answered-by">{{answer.author}}</div>
+                  <div class="answer">{{answer.text}}</div>
+
                 </div>
                 <div class="add-answer"><a><i class="fa fa-plus-circle"></i>
  Got another answer?</a></div>
