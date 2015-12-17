@@ -33,7 +33,6 @@
     var ref = new Firebase("https://askanything.firebaseio.com/questions");
     var userProfile = new Firebase("https://askanything.firebaseio.com/users");
 
-
     //USER AUTHENTICATION STARTS HERE//-----------
 
     $scope.user = "";
@@ -42,6 +41,7 @@
     $scope.userName = "";
     $scope.alert = "";
 
+    $scope.loggedInUser = "";
 
     //SIGN UP
     $scope.createUser = function () {
@@ -62,7 +62,8 @@
           name: $scope.userName,
         }, function (error, userData) {
           if (error) {
-            $scope.alert = "Error creating user:", error;
+            $scope.alert = "Error creating user";
+            console.log(error);
           } else {
             console.log("Successfully create acount " + $scope.userName);
 
@@ -87,9 +88,8 @@
                   if (authData && isNewUser) {
                     userRef.child("users").child(authData.uid).set({
                       provider: authData.provider,
-                      name: $scope.userName
+                      name: $scope.userName,
                     });
-
                   }
                 });
               }
@@ -141,6 +141,24 @@
       } else {}
     }
 
+    // Find username
+    $scope.listUser = function () {
+      userProfile.on("value", function (snapshot) {
+          var userListObject = snapshot.val();
+          var userListArray = [];
+          var currentID = authData.uid;
+          console.log(Object.keys(userListObject));
+          console.log(userListObject);
+          for (var prop in userListObject) {
+            if (currentID == prop) {
+              $scope.loggedInUser = userListObject[prop].name;
+            }
+          }
+        },
+        function (errorObject) {
+          console.log("The read failed: " + errorObject.code);
+        });
+    }
 
     //ADDING QUESTION LOGIC//-----------
 
@@ -148,30 +166,33 @@
     $scope.questions = $firebaseArray(ref);
     $scope.users = $firebaseArray(userProfile);
 
+
     // Add new question
     $scope.addQuestion = function () {
       var timestamp = new Date();
       $scope.questions.$add({
         text: $scope.newQuestionText,
         date: timestamp.getTime(),
-        author: "",
-        answer: "",
-        answerBy: "",
+        author: $scope.loggedInUser,
+        answers: {},
         status: 0,
         heart: 0,
       });
-
       $scope.newQuestionText = "";
     };
 
     // Edit answer
-    $scope.answerQuestion = function (question) {
+    $scope.addAnswer = function (question) {
+      var questionRef = ref.child(question.$id);
+      questionRef.child("answers").push({
+        text: question.answer,
+        author: $scope.loggedInUser,
+      });
       ref.child(question.$id).update({
-        "answer": question.answer,
-        answerBy: authData.uid,
-        "status": 1
+        "status": 1,
       })
     }
+
 
     // Add hearts
     $scope.heartQuestion = function (question) {
