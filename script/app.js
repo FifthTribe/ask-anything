@@ -177,24 +177,33 @@
       $scope.newQuestionText = "";
     };
 
+    // Add hearts
+    $scope.heartQuestion = function (question) {
+      ref.child(question.$id).update({
+        "heart": question.heart + 1,
+      })
+    }
+
     // Edit answer
     $scope.addAnswer = function (question) {
       var questionRef = ref.child(question.$id);
       questionRef.child("answers").push({
         text: question.answer,
         author: $scope.loggedInUser,
+        vote: 0
       });
       ref.child(question.$id).update({
-        "status": 1,
-      })
+        "status": question.status + 1,
+      });
+      $scope.showTheForm = true;
     }
 
-
-    // Add hearts
-    $scope.heartQuestion = function (question) {
-      ref.child(question.$id).update({
-        "heart": question.heart + 1,
-      })
+    // Add votes
+    $scope.voteAnswer = function (question) {
+      var questionRef = ref.child(question.$id);
+      questionRef.child("answers").update({
+        vote: answer.vote + 1
+      });
     }
 
   });

@@ -33,56 +33,44 @@
       <div class="row">
         <div class="col-md-6">
           <h2>Recently asked</h2>
-          <!-- Unanswered-->
-          <div class="questions" ng-repeat="question in questions | filter: { status: 0 } | orderBy:'-date'">
+          <div class="questions" ng-repeat="question in questions | orderBy:'-date' | orderBy:'status'">
             <div class="row">
               <div class="col-md-10 ">
                 <div class="by">{{question.author}}</div>
                 <div class="date "> • {{question.date | date:'MM.dd.yyyy'}}</div>
                 <div class="q ">{{question.text}}</div>
 
-                <!-- Answer input-->
-                <form class="answer-form" ng-submit="addAnswer(question)">
-                  <input ng-model="question.answer" placeholder="You have the answer?" />
-                  <button type="submit">Submit</button>
-                </form>
-
-              </div>
-              <div class="col-md-2">
-                <div class="heart"><a ng-click="heartQuestion(question)"><i class="fa fa-heart-o "></a></i><span class="heart-number">{{question.heart}}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <!-- Answered-->
-          <div class="questions" ng-repeat="question in questions | filter: { status: 1 }| orderBy:'-date' | limitTo : 20">
-            <div class="row">
-              <div class="col-md-10 ">
-                <div class="by">{{question.author}}</div>
-                <div class="date "> • {{question.date | date:'MM.dd.yyyy'}}</div>
-                <div class="q">{{question.text}}</div>
 
                 <!-- Anwser-->
                 <div class="answer-field" ng-repeat="answer in question.answers">
                   <div class="answered-by">{{answer.author}}</div>
                   <div class="answer">{{answer.text}}</div>
+                  <div class="answer-vote" ng-show="question.status > 1"><a ng-click="voteAnswer(answer)"><i class="fa fa-thumbs-o-up"></i></a><span class="vote-number">{{answer.vote}}</span></div>
 
                 </div>
 
                 <!-- Answer input-->
-                <form class="answer-form" ng-submit="addAnswer(question)">
+                <form class="answer-form" ng-submit="addAnswer(question)" ng-hide="question.status > 0">
                   <input ng-model="question.answer" placeholder="You have the answer?" />
                   <button type="submit">Submit</button>
                 </form>
 
+                <!--Hidden input-->
+                <div class="hidden-input" ng-hide="question.status == 0">
+                  <form class="answer-form" ng-hide="showTheForm" ng-submit="addAnswer(question)" style="margin-bottom: 5px">
+                    <input ng-model="question.answer" placeholder="You have the answer?" />
+                    <button type="submit">Submit</button>
+                  </form>
+                  <a class="add-answer" ng-click="showTheForm = false"><i class="fa fa-plus-circle" ></i>
+ Got another answer?</a>
 
-                <div class="add-answer"><a><i class="fa fa-plus-circle"></i>
- Got another answer?</a></div>
+                </div>
+
               </div>
+
+              <!--  Heart-->
               <div class="col-md-2">
-                <div class="heart"><a ng-click="heartQuestion(question)"><i class="fa fa-heart-o "></a></i><span class="heart-number">{{question.heart}}</span>
+                <div class="heart"><a ng-click="heartQuestion(question)"><i class="fa fa-heart-o "></i></a><span class="heart-number">{{question.heart}}</span>
                 </div>
               </div>
             </div>
@@ -92,34 +80,49 @@
         <!--Favorites-->
         <div class="col-md-6">
           <h2>Favorites</h2>
-          <div class="questions" ng-repeat="question in questions | orderBy:'-heart' | limitTo : 10" ng-hide="question.heart < 5">
+          <div class="questions" ng-repeat="question in questions | orderBy:'-date' | orderBy:'status'" ng-show="question.heart > 4">
             <div class="row">
               <div class="col-md-10 ">
                 <div class="by">{{question.author}}</div>
-                <div class="date"> • {{question.date | date:'MM.dd.yyyy'}}</div>
+                <div class="date "> • {{question.date | date:'MM.dd.yyyy'}}</div>
                 <div class="q ">{{question.text}}</div>
 
-                <!-- Answer input-->
-                <form class="answer-form" ng-submit="answerQuestion(question)" ng-hide="question.status == 1">
-                  <input ng-model="question.answer" placeholder="You have the answer? " />
-                  <button type="submit">Submit</button>
-                </form>
 
                 <!-- Anwser-->
                 <div class="answer-field" ng-repeat="answer in question.answers">
                   <div class="answered-by">{{answer.author}}</div>
                   <div class="answer">{{answer.text}}</div>
+                  <div class="answer-vote" ng-show="question.status > 1"><a ng-click="voteAnswer(answer)"><i class="fa fa-thumbs-o-up"></i></a><span class="vote-number">{{answer.vote}}</span></div>
 
                 </div>
-                <div class="add-answer"><a><i class="fa fa-plus-circle"></i>
- Got another answer?</a></div>
+
+                <!-- Answer input-->
+                <form class="answer-form" ng-submit="addAnswer(question)" ng-hide="question.status > 0">
+                  <input ng-model="question.answer" placeholder="You have the answer?" />
+                  <button type="submit">Submit</button>
+                </form>
+
+                <!--Hidden input-->
+                <div class="hidden-input" ng-hide="question.status == 0">
+                  <form class="answer-form" ng-hide="showTheForm" ng-submit="addAnswer(question)" style="margin-bottom: 5px">
+                    <input ng-model="question.answer" placeholder="You have the answer?" />
+                    <button type="submit">Submit</button>
+                  </form>
+                  <a class="add-answer" ng-click="showTheForm = false"><i class="fa fa-plus-circle" ></i>
+ Got another answer?</a>
+
+                </div>
+
               </div>
+
+              <!--  Heart-->
               <div class="col-md-2">
-                <div class="heart"><a ng-click="heartQuestion(question)()"><i class="fa fa-heart-o "></a></i><span class="heart-number">{{question.heart}}</span>
+                <div class="heart"><a ng-click="heartQuestion(question)"><i class="fa fa-heart-o "></i></a><span class="heart-number">{{question.heart}}</span>
                 </div>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
