@@ -194,7 +194,7 @@ h3 {
 .question-list {
   position: relative;
   z-index: 100;
-  top: 550px;
+  top: 480px;
 }
 
 .recent {
@@ -236,7 +236,8 @@ h3 {
 }
 
 //Answer field
-.answer-form {
+.answer-form,
+.muted-answer-form {
   margin-top: 5px;
   background-color: rgba( $secondary, .5);
   width: 100%;
@@ -253,6 +254,11 @@ h3 {
     border: none;
     color: $grey;
   }
+}
+
+.muted-answer-form {
+  border: 1px solid rgba($grey, .4);
+  background-color: rgba( $grey, .1);
 }
 
 .answer-field {

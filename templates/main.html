@@ -33,7 +33,32 @@
       <div class="row">
         <div class="col-md-6">
           <h2>Recently asked</h2>
-          <div class="questions" ng-repeat="question in questions | orderBy:'-date' | orderBy:'status'">
+          <!-- Unanswered-->
+          <div class="questions" ng-repeat="question in questions | orderBy:'-date'" ng-show="question.status == 0">
+            <div class="row">
+              <div class="col-md-10 ">
+                <div class="by">{{question.author}}</div>
+                <div class="date "> • {{question.date | date:'MM.dd.yyyy'}}</div>
+                <div class="q ">{{question.text}}</div>
+
+                <!-- Answer input-->
+                <form class="answer-form" ng-submit="addAnswer(question)" ng-hide="question.status > 0">
+                  <input ng-model="question.answer" placeholder="You have the answer?" />
+                  <button type="submit">Submit</button>
+                </form>
+
+              </div>
+
+              <!--  Heart-->
+              <div class="col-md-2">
+                <div class="heart"><a ng-click="heartQuestion(question)"><i class="fa fa-heart-o "></i></a><span class="heart-number">{{question.heart}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--Answered-->
+          <div class="questions" ng-repeat="question in questions | orderBy:'-date'" ng-show="question.status > 0">
             <div class="row">
               <div class="col-md-10 ">
                 <div class="by">{{question.author}}</div>
@@ -49,20 +74,16 @@
 
                 </div>
 
-                <!-- Answer input-->
-                <form class="answer-form" ng-submit="addAnswer(question)" ng-hide="question.status > 0">
-                  <input ng-model="question.answer" placeholder="You have the answer?" />
-                  <button type="submit">Submit</button>
-                </form>
-
                 <!--Hidden input-->
                 <div class="hidden-input" ng-hide="question.status == 0">
-                  <form class="answer-form" ng-hide="showTheForm" ng-submit="addAnswer(question)" style="margin-bottom: 5px">
-                    <input ng-model="question.answer" placeholder="You have the answer?" />
+                  <form class="muted-answer-form" ng-submit="addAnswer(question)" style="margin-bottom: 5px">
+                    <input ng-model="question.answer" placeholder="You have a different idea?" />
                     <button type="submit">Submit</button>
                   </form>
-                  <a class="add-answer" ng-click="showTheForm = false"><i class="fa fa-plus-circle" ></i>
+                  <!--
+                  <a class="add-answer" ng-click="showTheForm = !showTheForm"><i class="fa fa-plus-circle" ></i>
  Got another answer?</a>
+-->
 
                 </div>
 
@@ -75,6 +96,7 @@
               </div>
             </div>
           </div>
+
         </div>
 
         <!--Favorites-->

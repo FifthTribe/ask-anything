@@ -195,7 +195,6 @@
       ref.child(question.$id).update({
         "status": question.status + 1,
       });
-      $scope.showTheForm = true;
     }
 
     // Add votes

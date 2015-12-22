@@ -183,7 +183,7 @@ h3 {
 .question-list {
   position: relative;
   z-index: 100;
-  top: 550px; }
+  top: 480px; }
 
 /* line 200, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
 .recent {
@@ -222,32 +222,40 @@ h3 {
   color: #ea4f1f;
   font-size: 13px; }
 
-/* line 239, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
-.answer-form {
+/* line 240, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+.answer-form,
+.muted-answer-form {
   margin-top: 5px;
   background-color: rgba(255, 233, 227, 0.5);
   width: 100%;
   border: 1px solid rgba(234, 79, 31, 0.4);
   padding: 3px 10px;
   border-radius: 2px; }
-  /* line 246, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
-  .answer-form input {
+  /* line 247, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  .answer-form input,
+  .muted-answer-form input {
     border: none;
     background-color: transparent;
     width: 85%; }
-  /* line 251, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
-  .answer-form button {
+  /* line 252, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  .answer-form button,
+  .muted-answer-form button {
     background-color: transparent;
     border: none;
     color: #ACB6C2; }
 
-/* line 258, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+/* line 259, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+.muted-answer-form {
+  border: 1px solid rgba(172, 182, 194, 0.4);
+  background-color: rgba(172, 182, 194, 0.1); }
+
+/* line 264, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
 .answer-field {
   margin-top: 3px;
   background-color: rgba(172, 182, 194, 0.1);
   padding: 3px 10px; }
 
-/* line 264, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+/* line 270, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
 .answer {
   display: inline-block;
   color: black;
@@ -255,60 +263,60 @@ h3 {
   font-weight: 400;
   width: 63%; }
 
-/* line 272, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+/* line 278, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
 .answered-by {
   width: 25%;
   display: inline-block;
   color: #5C9ED4;
   font-size: 14px; }
 
-/* line 279, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+/* line 285, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
 .hidden-input {
   margin-top: 5px; }
 
-/* line 283, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+/* line 289, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
 .add-answer {
   margin-left: 10px;
   font-size: 12px;
   color: #ACB6C2;
   cursor: pointer; }
-  /* line 288, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  /* line 294, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
   .add-answer:hover {
     text-decoration: none;
     font-weight: 400;
     color: #ea4f1f; }
-  /* line 293, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  /* line 299, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
   .add-answer .fa {
     font-size: 14px;
     margin-right: 3px; }
 
-/* line 300, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+/* line 306, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
 .heart,
 .answer-vote {
   padding-left: 25px;
   font-size: 18px;
   color: #ACB6C2;
   cursor: pointer; }
-  /* line 305, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  /* line 311, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
   .heart a,
   .answer-vote a {
     color: #ACB6C2; }
-  /* line 309, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  /* line 315, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
   .heart:hover a,
   .answer-vote:hover a {
     color: #ea4f1f; }
 
-/* line 315, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+/* line 321, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
 .answer-vote {
   padding-left: 10px;
   display: inline-block;
   width: 10%; }
 
-/* line 321, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+/* line 327, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
 .active {
   color: #ea4f1f; }
 
-/* line 326, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+/* line 332, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
 .heart-number,
 .vote-number {
   margin-left: 5px;
@@ -316,19 +324,19 @@ h3 {
   font-weight: 200; }
 
 @media (max-width: 786px) {
-  /* line 334, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  /* line 340, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
   .ask img {
     max-width: 300px; }
-  /* line 339, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  /* line 345, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
   .ask-form imput {
     width: 80%; }
-  /* line 342, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  /* line 348, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
   .ask-form button {
     display: none; }
-  /* line 346, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  /* line 352, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
   .question-list {
     top: 250px; }
-  /* line 350, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
+  /* line 356, /Users/AnhLe/Creative Cloud Files/Experiment/Ask Anything/style/main.scss */
   .answer-form button {
     display: none; } }
 
