@@ -187,10 +187,18 @@
     // Edit answer
     $scope.addAnswer = function (question) {
       var questionRef = ref.child(question.$id);
-      questionRef.child("answers").push({
+      var questionKey = question.$id;
+      var answersRef = questionRef.child("answers");
+      var eachAnswer = answersRef.push({
         text: question.answer,
         author: $scope.loggedInUser,
         vote: 0
+      });
+      var answerKey = eachAnswer.key();
+      console.log(answerKey);
+      answersRef.child(answerKey).update({
+        qid: questionKey,
+        aid: answerKey
       });
       ref.child(question.$id).update({
         "status": question.status + 1,
@@ -198,11 +206,12 @@
     }
 
     // Add votes
-    $scope.voteAnswer = function (question) {
-      var questionRef = ref.child(question.$id);
-      questionRef.child("answers").update({
+    $scope.voteAnswer = function (answer) {
+      var thisId = answer.aid;
+      var answerPath = ref.child(answer.qid).child("answers");
+      answerPath.child(thisId).update({
         vote: answer.vote + 1
-      });
+      })
     }
 
   });
