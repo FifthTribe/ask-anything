@@ -14,7 +14,6 @@
       }).
       when('/main', {
         templateUrl: 'templates/main.html',
-        controller: 'FirebaseCtrl'
       }).
       when('/signup', {
         templateUrl: 'templates/signup.html',
@@ -107,8 +106,10 @@
         password: $scope.password,
       }, function (error, authData) {
         if (error) {
-          console.log("Login fail " + error);
-          $scope.alert = "Invalid username and/or password";
+          $timeout(function () {
+            console.log("Login fail " + error);
+            $scope.alert = "Invalid username and/or password";
+          });
         } else {
           $timeout(function () {
             $location.path("/main");
@@ -207,9 +208,8 @@
 
     // Add votes
     $scope.voteAnswer = function (answer) {
-      var thisId = answer.aid;
       var answerPath = ref.child(answer.qid).child("answers");
-      answerPath.child(thisId).update({
+      answerPath.child(answer.aid).update({
         vote: answer.vote + 1
       })
     }

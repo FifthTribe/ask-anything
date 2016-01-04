@@ -116,6 +116,10 @@ h3 {
     margin-top: 10px;
     cursor: pointer;
     text-align: center;
+    &:hover {
+      color: $main;
+      text-decoration: none;
+    }
   }
   label {
     padding-top: 6px;
