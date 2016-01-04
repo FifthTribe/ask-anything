@@ -273,6 +273,7 @@ h3 {
   font-size: 15px;
   font-weight: 400;
   width: 63%;
+  vertical-align: top;
 }
 
 .answered-by {
@@ -280,6 +281,7 @@ h3 {
   display: inline-block;
   color: $name;
   font-size: 14px;
+  vertical-align: top;
 }
 
 .hidden-input {
@@ -321,6 +323,7 @@ h3 {
 .answer-vote {
   padding-left: 10px;
   display: inline-block;
+  vertical-align: top;
   width: 10%;
 }
 
