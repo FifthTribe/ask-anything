@@ -38,7 +38,7 @@
             <!-- Unanswered-->
             <div class="questions" ng-repeat="question in questions | orderBy:'-date'" ng-show="question.status == 0">
               <div class="row">
-                <div class="col-md-10 ">
+                <div class="col-md-11 ">
                   <div class="by">{{question.author}}</div>
                   <div class="date "> • {{question.date | date:'MM.dd.yyyy'}}</div>
                   <div class="q ">{{question.text}}</div>
@@ -52,7 +52,7 @@
                 </div>
 
                 <!--  Heart-->
-                <div class="col-md-2">
+                <div class="col-md-1 heart-column">
                   <div class="heart"><a ng-click="heartQuestion(question)"><i class="fa fa-heart-o "></i></a><span class="heart-number">{{question.heart}}</span>
                   </div>
                 </div>
@@ -62,7 +62,7 @@
             <!--Answered-->
             <div class="questions" ng-repeat="question in questions | orderBy:'-date'" ng-show="question.status > 0">
               <div class="row">
-                <div class="col-md-10 ">
+                <div class="col-md-11 ">
                   <div class="by">{{question.author}}</div>
                   <div class="date "> • {{question.date | date:'MM.dd.yyyy'}}</div>
                   <div class="q ">{{question.text}}</div>
@@ -92,7 +92,7 @@
                 </div>
 
                 <!--  Heart-->
-                <div class="col-md-2">
+                <div class="col-md-1 heart-column">
                   <div class="heart"><a ng-click="heartQuestion(question)"><i class="fa fa-heart-o "></i></a><span class="heart-number">{{question.heart}}</span>
                   </div>
                 </div>
@@ -106,7 +106,7 @@
             <h2>Questions of the Week</h2>
             <div class="questions" ng-repeat="question in questions | orderBy:'-date' | orderBy:'status'" ng-show="question.heart > 4">
               <div class="row">
-                <div class="col-md-10 ">
+                <div class="col-md-11 ">
                   <div class="by">{{question.author}}</div>
                   <div class="date "> • {{question.date | date:'MM.dd.yyyy'}}</div>
                   <div class="q ">{{question.text}}</div>
@@ -136,7 +136,7 @@
                 </div>
 
                 <!--  Heart-->
-                <div class="col-md-2">
+                <div class="col-md-1 heart column">
                   <div class="heart"><a ng-click="heartQuestion(question)"><i class="fa fa-heart-o "></i></a><span class="heart-number">{{question.heart}}</span>
                   </div>
                 </div>

@@ -88,6 +88,7 @@
                     userRef.child("users").child(authData.uid).set({
                       provider: authData.provider,
                       name: $scope.userName,
+                      email: $scope.user,
                     });
                   }
                 });

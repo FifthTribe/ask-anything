@@ -268,21 +268,21 @@ h3 {
 .answer-field {
   margin-top: 3px;
   background-color: rgba($grey, .1);
-  padding: 3px 10px;
+  padding: 10px 10px;
 }
 
 .answer {
   display: inline-block;
   color: black;
   font-size: 15px;
-  font-weight: 400;
-  width: 63%;
+  font-weight: 300;
+  width: 68%;
   vertical-align: top;
 }
 
 .answered-by {
-  width: 25%;
-  display: inline-block;
+  width: 20%;
+  display: inline-block !important;
   color: $name;
   font-size: 14px;
   vertical-align: top;
@@ -308,9 +308,14 @@ h3 {
   }
 }
 
+.heart-column {
+  padding-left: 0px;
+  padding-right: 3px;
+}
+
 .heart,
 .answer-vote {
-  padding-left: 25px;
+  padding-left: 0px;
   font-size: 18px;
   color: $grey;
   cursor: pointer;
