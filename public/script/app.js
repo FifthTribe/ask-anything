@@ -136,7 +136,6 @@
       // Find username
       userProfile.on("value", function (snapshot) {
           var userListObject = snapshot.val();
-          var userListArray = [];
           var currentID = authData.uid;
           for (var prop in userListObject) {
             if (currentID == prop) {
@@ -165,7 +164,7 @@
     $scope.users = $firebaseArray(userProfile);
 
 
-    // Add new question
+    // ADD NEW QUESTION
     $scope.addQuestion = function () {
       var timestamp = new Date();
       $scope.questions.$add({
@@ -186,34 +185,71 @@
       })
     }
 
-    // Edit answer
+    // ADD ANSWER
     $scope.addAnswer = function (question) {
-      var questionRef = ref.child(question.$id);
       var questionKey = question.$id;
-      var answersRef = questionRef.child("answers");
+      //      Start a table called "answers"
+      var answersRef = ref.child(question.$id).child("answers");
+      //      Generate object with unique id into the answers table
       var eachAnswer = answersRef.push({
         text: question.answer,
         author: $scope.loggedInUser,
-        vote: 0
+        vote: 0,
+        voteBy: [],
       });
+      //      Now that the answer is created get the id of that answer
       var answerKey = eachAnswer.key();
       console.log(answerKey);
+      //      Log the both question and answer ids into the object to call them out when needed  
       answersRef.child(answerKey).update({
         qid: questionKey,
         aid: answerKey
       });
+      //      Update number of responses to this question
       ref.child(question.$id).update({
         "status": question.status + 1,
       });
     }
 
-    // Add votes
+    // ADD VOTES
     $scope.voteAnswer = function (answer) {
-      var answerPath = ref.child(answer.qid).child("answers");
-      answerPath.child(answer.aid).update({
-        vote: answer.vote + 1
-      })
+      //      This is the path to the answer
+      var answerPath = ref.child(answer.qid).child("answers").child(answer.aid);
+      var hasVoted = $firebaseArray(answerPath.child("voteBy"));
+
+      //      Find out if user has voted
+      var cannotVoteAgain = false;
+
+      //      Loop through voteBy object to take snapshot of it's child value and match with user's name
+      answerPath.child("voteBy").once("value", function (snapshot) {
+        // The callback function will get called twice, once for "fred" and once for "barney"
+        snapshot.forEach(function (childSnapshot) {
+          // key will be "fred" the first time and "barney" the second time
+          var key = childSnapshot.key();
+          // childData will be the actual contents of the child
+          var childData = childSnapshot.val();
+          console.log(childData);
+          for (var i = 0; i < childData.length; i++) {
+            if (childData == $scope.loggedInUser) {
+              cannotVoteAgain = true;
+              console.log("You've already voted")
+              break;
+            }
+          }
+
+        });
+      });
+
+      //      If user has not voted
+      if (!cannotVoteAgain) {
+        console.log("You can vote now");
+        answerPath.update({
+          vote: answer.vote + 1
+        });
+        hasVoted.$add($scope.loggedInUser);
+      }
     }
+
 
   });
 })();
