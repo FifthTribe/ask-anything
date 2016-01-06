@@ -187,6 +187,7 @@
         answers: {},
         status: 0,
         heart: 0,
+        likeBy: [],
       });
       $scope.newQuestionText = "";
     };
@@ -196,6 +197,44 @@
       ref.child(question.$id).update({
         "heart": question.heart + 1,
       })
+    }
+
+    $scope.heartQuestion = function (question) {
+      //      This is the path to the answer
+      var questionPath = ref.child(question.$id);
+      var hasLiked = $firebaseArray(questionPath.child("likeBy"));
+
+      //      Find out if user has voted
+      var cannotLikeAgain = false;
+
+      //      Loop through voteBy object to take snapshot of it's child value and match with user's name
+      questionPath.child("likeBy").once("value", function (snapshot) {
+        // The callback function will get called twice, once for "fred" and once for "barney"
+        snapshot.forEach(function (childSnapshot) {
+          // key will be "fred" the first time and "barney" the second time
+          var key = childSnapshot.key();
+          // childData will be the actual contents of the child
+          var childData = childSnapshot.val();
+          console.log(childData);
+          for (var i = 0; i < childData.length; i++) {
+            if (childData == $scope.loggedInUser) {
+              cannotLikeAgain = true;
+              console.log("You've already liked")
+              break;
+            }
+          }
+
+        });
+      });
+
+      //      If user has not voted
+      if (!cannotLikeAgain) {
+        console.log("You can Like now");
+        questionPath.update({
+          heart: question.heart + 1
+        });
+        hasLiked.$add($scope.loggedInUser);
+      }
     }
 
     // ADD ANSWER
