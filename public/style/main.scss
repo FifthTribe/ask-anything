@@ -74,22 +74,31 @@ h3 {
 .header {
   padding-top: 15px;
   .user-control {
-    float: right;
-  }
-  a {
-    display: inline-block;
-    color: $main;
-    border: none;
-    margin-right: 10px;
-  }
-  button {
-    display: inline-block;
-    font-weight: 500;
-    color: $grey;
+    color: black;
+    font-size: 15px;
+    font-weight: 300;
     border: none;
     background-color: transparent;
-    &:hover {
+    span {
       color: $main;
+      font-weight: 400;
+      margin-right: 5px;
+    }
+  }
+  .dropdown-menu {
+    box-shadow: none;
+    border: 1px solid $main;
+    border-radius: 2px;
+    padding: 0;
+    button {
+      width: 100%;
+      text-align: left;
+      background-color: white;
+      border: none;
+      padding: 5px 15px;
+      &:hover {
+        background-color: $secondary;
+      }
     }
   }
 }

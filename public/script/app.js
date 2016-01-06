@@ -9,7 +9,7 @@
   function ($routeProvider) {
       $routeProvider.
       when('/', {
-        templateUrl: 'templates/index.html',
+        templateUrl: 'templates/login.html',
         controller: 'FirebaseCtrl'
       }).
       when('/main', {

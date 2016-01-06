@@ -3,10 +3,20 @@
   <section class="home">
     <div class="container">
       <div class="header">
-        <div class="user-control">
-          <a>{{loggedInUser}}</a>
-          <button class="sign-out" ng-click="logoutUser()">Sign out</button>
+        <div class="dropdown" style="float: right">
+          <button class="dropdown-toggle user-control" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Hello <span>{{loggedInUser}}</span>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <button class="user-setting" ng-click="anonymousSwitch()">Anonymous mode</button>
+            <button class="user-setting" ng-click="anonymousSwitch()">Change password</button>
+            <li>
+              <button class="user-setting" ng-click="logoutUser()">Log out</button>
+            </li>
+          </ul>
         </div>
+
         <div class="row askanything">
           <div class="col-md-4 col-md-offset-4">
             <img src="img/askanything.png">
