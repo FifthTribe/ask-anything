@@ -157,6 +157,18 @@
       } else {}
     }
 
+    //    ANONYMOUS MODE
+    $scope.anonymous = false;
+
+    console.log($scope.anonymous);
+    $scope.anonymousOn = function () {
+      $scope.anonymous = true;
+    }
+
+    $scope.anonymousOff = function () {
+      $scope.anonymous = false;
+    }
+
     //ADDING QUESTION LOGIC//-----------
 
     // Create a synchronized array
@@ -171,6 +183,7 @@
         text: $scope.newQuestionText,
         date: timestamp.getTime(),
         author: $scope.loggedInUser,
+        anonymous: $scope.anonymous,
         answers: {},
         status: 0,
         heart: 0,
@@ -187,13 +200,16 @@
 
     // ADD ANSWER
     $scope.addAnswer = function (question) {
+      var timestamp = new Date();
       var questionKey = question.$id;
       //      Start a table called "answers"
       var answersRef = ref.child(question.$id).child("answers");
       //      Generate object with unique id into the answers table
       var eachAnswer = answersRef.push({
         text: question.answer,
+        date: timestamp.getTime(),
         author: $scope.loggedInUser,
+        anonymous: $scope.anonymous,
         vote: 0,
         voteBy: [],
       });

@@ -101,6 +101,22 @@ h3 {
       }
     }
   }
+  .anonymous {
+    font-size: 13px;
+    float: left;
+    color: $main;
+    display: inline-block;
+    .fa {
+      margin-right: 5px;
+    }
+    button {
+      display: inline-block;
+      background-color: transparent;
+      border: none;
+      color: black;
+      font-weight: 400;
+    }
+  }
 }
 
 .askanything {
@@ -243,8 +259,15 @@ h3 {
 }
 
 .by {
-  display: inline-block;
+  display: inline;
   color: $main;
+  font-size: 13px;
+}
+
+.by-anonymous {
+  display: inline;
+  color: black;
+  opacity: .7;
   font-size: 13px;
 }
 
@@ -282,17 +305,25 @@ h3 {
 
 .answer {
   display: inline-block;
-  color: black;
-  font-size: 15px;
-  font-weight: 300;
-  width: 68%;
+  width: 90%;
   vertical-align: top;
 }
 
+.answer-text {
+  color: black;
+  font-size: 15px;
+  font-weight: 300;
+}
+
 .answered-by {
-  width: 20%;
-  display: inline-block !important;
   color: $name;
+  font-size: 14px;
+  vertical-align: top;
+}
+
+.answered-by-anonymous {
+  color: black;
+  opacity: .7;
   font-size: 14px;
   vertical-align: top;
 }
@@ -342,7 +373,7 @@ h3 {
   padding-left: 10px;
   display: inline-block;
   vertical-align: top;
-  width: 10%;
+  width: 8%;
 }
 
 .active {
