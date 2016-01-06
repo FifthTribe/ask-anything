@@ -10,7 +10,9 @@
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
             <button class="user-setting" ng-click="anonymousOn()" ng-hide="anonymous">Anonymous mode</button>
-            <button class="user-setting" ng-click="anonymousOn()" ng-show="anonymous">Turn off anonymous</button>
+            <button class="user-setting" ng-click="anonymousOff()" ng-show="anonymous">Turn off anonymous</button>
+            <button class="user-setting" ng-click="adminOn()" ng-show="admin" ng-hide="adminMode">Manager mode</button>
+            <button class="user-setting" ng-click="adminOff()" ng-show="adminMode">Turn off manager</button>
             <button class="user-setting" ng-click="anonymousSwitch()">Change password</button>
             <li>
               <button class="user-setting" ng-click="logoutUser()">Log out</button>
@@ -20,6 +22,10 @@
         <div class="anonymous" ng-show="anonymous">
           <i class="fa fa-bell"></i>You are in anomymous mode.
           <button ng-click="anonymousOff()">Turn off</button>
+        </div>
+        <div class="anonymous" ng-show="adminMode">
+          <i class="fa fa-bell"></i>You are in manager mode. All questions will be submitted as company survey.
+          <button ng-click="adminOff()">Turn off</button>
         </div>
 
         <div class="row askanything">
@@ -55,8 +61,11 @@
             <div class="questions" ng-repeat="question in questions | orderBy:'-date'" ng-show="question.status == 0">
               <div class="row">
                 <div class="col-md-11 ">
-                  <div class="by" ng-hide=(question.anonymous)>{{question.author}}</div>
-                  <div class="by-anonymous" ng-show=(question.anonymous)>Anonymous</div>
+                  <div class="star" ng-show="question.admin">
+                    <i class="fa fa-star"></i></div>
+                  <div class="by" ng-hide="question.anonymous  || question.admin">{{question.author}}</div>
+                  <div class="by-anonymous" ng-show="question.anonymous">Anonymous</div>
+                  <div class="by-admin" ng-show="question.admin">Company Survey</div>
                   <div class="date "> • {{question.date | date:'MM.dd.yyyy'}}</div>
                   <div class="q">{{question.text}}</div>
 
@@ -80,8 +89,9 @@
             <div class="questions" ng-repeat="question in questions | orderBy:'-date'" ng-show="question.status > 0">
               <div class="row">
                 <div class="col-md-11 ">
-                  <div class="by" ng-hide=(question.anonymous)>{{question.author}}</div>
+                  <div class="by" ng-hide="question.anonymous || question.admin">{{question.author}}</div>
                   <div class="by-anonymous" ng-show=(question.anonymous)>Anonymous</div>
+                  <div class="by-admin" ng-show=(question.admin)>Company Survey</div>
                   <div class="date "> • {{question.date | date:'MM.dd.yyyy'}}</div>
                   <div class="q ">{{question.text}}</div>
 

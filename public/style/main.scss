@@ -1,6 +1,7 @@
 //Color
 $main: #ea4f1f;
 $secondary: #ffe9e3;
+$pop: #FFBF00;
 $grey: #ACB6C2;
 $name: #5C9ED4;
 //------------------------
@@ -238,11 +239,25 @@ h3 {
 }
 
 .questions {
-  background-color: white;
+  background-color: rgba(255, 255, 255, .95);
   padding: 15px 15px;
   box-shadow: 0 3px 1px rgba(0, 0, 0, 0.15);
   border-radius: 2px;
   margin-bottom: 10px;
+}
+
+.star {
+  background-color: $pop;
+  border-radius: 20px;
+  padding: 10px;
+  margin-top: -50px;
+  margin-left: -30px;
+  margin-right: 5px;
+  display: inline-flex;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+  .fa {
+    color: white;
+  }
 }
 
 //Question field
@@ -250,6 +265,11 @@ h3 {
   font-size: 18px;
   color: black;
   font-weight: 400;
+}
+
+.company {
+  color: $main;
+  background-color: white;
 }
 
 .date {
@@ -266,9 +286,17 @@ h3 {
 
 .by-anonymous {
   display: inline;
-  color: black;
-  opacity: .7;
+  color: $name;
   font-size: 13px;
+}
+
+.by-admin {
+  display: inline;
+  color: $main;
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: 400;
+  margin-bottom: 10px;
 }
 
 //Answer field

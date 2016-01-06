@@ -157,17 +157,39 @@
       } else {}
     }
 
+    //    ADMIN MODE
+    if ($scope.loggedInUser.indexOf("Anh" || "Khuram" || "Asif") == 1) {
+      $scope.admin = false;
+      console.log($scope.loggedInUser);
+    } else {
+      $scope.admin = true;
+    };
+
+    $scope.adminMode = false;
+
+    $scope.adminOn = function () {
+      $scope.adminMode = true;
+      $scope.anonymous = false;
+      console.log("You're in admin mode " + $scope.adminMode)
+    }
+
+    $scope.adminOff = function () {
+      $scope.adminMode = false;
+    }
+
     //    ANONYMOUS MODE
     $scope.anonymous = false;
 
     console.log($scope.anonymous);
     $scope.anonymousOn = function () {
       $scope.anonymous = true;
+      $scope.adminMode = false;
     }
 
     $scope.anonymousOff = function () {
       $scope.anonymous = false;
     }
+
 
     //ADDING QUESTION LOGIC//-----------
 
@@ -184,6 +206,7 @@
         date: timestamp.getTime(),
         author: $scope.loggedInUser,
         anonymous: $scope.anonymous,
+        admin: $scope.adminMode,
         answers: {},
         status: 0,
         heart: 0,
@@ -249,6 +272,7 @@
         date: timestamp.getTime(),
         author: $scope.loggedInUser,
         anonymous: $scope.anonymous,
+        admin: $scope.adminMode,
         vote: 0,
         voteBy: [],
       });
