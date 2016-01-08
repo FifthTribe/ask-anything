@@ -1,36 +1,33 @@
 <div ng-controller="FirebaseCtrl">
-  <section class="header-bar">
-    <div class="container">
-      <div class="dropdown" style="float: right">
-        <button class="dropdown-toggle user-control" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          Hello <span>{{loggedInUser}}</span>
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-          <button class="user-setting" ng-click="anonymousOn()" ng-hide="anonymous">Anonymous mode</button>
-          <button class="user-setting" ng-click="anonymousOff()" ng-show="anonymous">Turn off anonymous</button>
-          <button class="user-setting" ng-click="adminOn()" ng-show="admin" ng-hide="adminMode">Manager mode</button>
-          <button class="user-setting" ng-click="adminOff()" ng-show="adminMode">Turn off manager</button>
-          <button class="user-setting" ng-click="anonymousSwitch()">Change password</button>
-          <li>
-            <button class="user-setting" ng-click="logoutUser()">Log out</button>
-          </li>
-        </ul>
-      </div>
-      <div class="anonymous" ng-show="anonymous">
-        <i class="fa fa-bell"></i>You are in <span>anonymous mode</span>.
-        <button ng-click="anonymousOff()">Turn off</button>
-      </div>
-      <div class="anonymous" ng-show="adminMode">
-        <i class="fa fa-bell"></i>You are in <span>manager mode</span>. All questions will be submitted as company survey.
-        <button ng-click="adminOff()">Turn off</button>
-      </div>
-    </div>
-  </section>
-
+  <!--  Question Input-->
   <section class="home">
     <div class="container">
-      <div class="submittion">
+      <div class="header">
+        <div class="dropdown" style="float: right">
+          <button class="dropdown-toggle user-control" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Hello <span>{{loggedInUser}}</span>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <button class="user-setting" ng-click="anonymousOn()" ng-hide="anonymous">Anonymous mode</button>
+            <button class="user-setting" ng-click="anonymousOff()" ng-show="anonymous">Turn off anonymous</button>
+            <button class="user-setting" ng-click="adminOn()" ng-show="admin" ng-hide="adminMode">Manager mode</button>
+            <button class="user-setting" ng-click="adminOff()" ng-show="adminMode">Turn off manager</button>
+            <button class="user-setting" ng-click="anonymousSwitch()">Change password</button>
+            <li>
+              <button class="user-setting" ng-click="logoutUser()">Log out</button>
+            </li>
+          </ul>
+        </div>
+        <div class="anonymous" ng-show="anonymous">
+          <i class="fa fa-bell"></i>You are in anomymous mode.
+          <button ng-click="anonymousOff()">Turn off</button>
+        </div>
+        <div class="anonymous" ng-show="adminMode">
+          <i class="fa fa-bell"></i>You are in manager mode. All questions will be submitted as company survey.
+          <button ng-click="adminOff()">Turn off</button>
+        </div>
+
         <div class="row askanything">
           <div class="col-md-4 col-md-offset-4">
             <img src="img/askanything.png">

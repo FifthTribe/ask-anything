@@ -72,65 +72,51 @@ h3 {
   }
 }
 
-.header-bar {
-  background-color: white;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-  padding: 10px 0;
-  position: fixed;
-  z-index: 1000;
-  width: 100%;
-}
-
-.user-control {
-  color: black;
-  font-size: 15px;
-  font-weight: 300;
-  border: none;
-  background-color: transparent;
-  span {
-    color: $main;
-    font-weight: 400;
-    margin-right: 5px;
-  }
-}
-
-.dropdown-menu {
-  box-shadow: none;
-  border: 1px solid $main;
-  border-radius: 2px;
-  padding: 0;
-  button {
-    width: 100%;
-    text-align: left;
-    background-color: white;
+.header {
+  padding-top: 15px;
+  .user-control {
+    color: black;
+    font-size: 15px;
+    font-weight: 300;
     border: none;
-    padding: 5px 15px;
-    &:hover {
-      background-color: $secondary;
+    background-color: transparent;
+    span {
+      color: $main;
+      font-weight: 400;
+      margin-right: 5px;
     }
   }
-}
-
-.anonymous {
-  font-size: 13px;
-  float: left;
-  color: black;
-  display: inline-block;
-  .fa {
-    color: $main;
-    margin-right: 5px;
+  .dropdown-menu {
+    box-shadow: none;
+    border: 1px solid $main;
+    border-radius: 2px;
+    padding: 0;
+    button {
+      width: 100%;
+      text-align: left;
+      background-color: white;
+      border: none;
+      padding: 5px 15px;
+      &:hover {
+        background-color: $secondary;
+      }
+    }
   }
-  span {
+  .anonymous {
+    font-size: 13px;
+    float: left;
     color: $main;
-    text-transform: capitalize;
-    font-weight: 400;
-  }
-  button {
     display: inline-block;
-    background-color: transparent;
-    border: none;
-    color: black;
-    font-weight: 400;
+    .fa {
+      margin-right: 5px;
+    }
+    button {
+      display: inline-block;
+      background-color: transparent;
+      border: none;
+      color: black;
+      font-weight: 400;
+    }
   }
 }
 

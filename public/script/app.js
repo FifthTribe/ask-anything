@@ -157,6 +157,19 @@
       } else {}
     }
 
+    //    CHANGE PASSWORD 
+    ref.changePassword({
+      email: "bobtony@firebase.com",
+      oldPassword: "correcthorsebatterystaple",
+      newPassword: "neatsupersecurenewpassword"
+    }, function (error) {
+      if (error === null) {
+        console.log("Password changed successfully");
+      } else {
+        console.log("Error changing password:", error);
+      }
+    });
+
     //    ADMIN MODE
     if ($scope.loggedInUser.indexOf("Anh" || "Khuram" || "Asif") == 1) {
       $scope.admin = false;
@@ -189,6 +202,8 @@
     $scope.anonymousOff = function () {
       $scope.anonymous = false;
     }
+
+
 
 
     //ADDING QUESTION LOGIC//-----------
