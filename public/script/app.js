@@ -218,6 +218,7 @@
       var timestamp = new Date();
       $scope.questions.$add({
         text: $scope.newQuestionText,
+        important: false,
         date: timestamp.getTime(),
         author: $scope.loggedInUser,
         anonymous: $scope.anonymous,
@@ -230,13 +231,14 @@
       $scope.newQuestionText = "";
     };
 
-    // Add hearts
-    $scope.heartQuestion = function (question) {
+    // MAKE IMPORTANT
+    $scope.important = function (question) {
       ref.child(question.$id).update({
-        "heart": question.heart + 1,
+        "important": true
       })
-    }
+    };
 
+    // Add hearts
     $scope.heartQuestion = function (question) {
       //      This is the path to the answer
       var questionPath = ref.child(question.$id);

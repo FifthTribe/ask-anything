@@ -58,7 +58,7 @@
           <div class="col-md-6">
             <h2>Recently asked</h2>
             <!-- Unanswered-->
-            <div class="questions" ng-repeat="question in questions | orderBy:'-date'" ng-show="question.status == 0">
+            <div class="questions" ng-repeat="question in questions | orderBy:'-date'" ng-show="question.status == 0 && !questions.important">
               <div class="row">
                 <div class="col-md-11 ">
                   <div class="star" ng-show="question.admin">
@@ -74,6 +74,7 @@
                     <input ng-model="question.answer" placeholder="You have the answer?" />
                     <button type="submit">Submit</button>
                   </form>
+                  <a class="important" ng-click="important()" ng-show="admin">Mark important</a>
 
                 </div>
 
@@ -86,7 +87,7 @@
             </div>
 
             <!--Answered-->
-            <div class="questions" ng-repeat="question in questions | orderBy:'-date'" ng-show="question.status > 0">
+            <div class="questions" ng-repeat="question in questions | orderBy:'-date'" ng-show="question.status > 0 && !question.important">
               <div class="row">
                 <div class="col-md-11 ">
                   <div class="by" ng-hide="question.anonymous || question.admin">{{question.author}}</div>
@@ -115,12 +116,9 @@
                       <input ng-model="question.answer" placeholder="You have a different idea?" />
                       <button type="submit">Submit</button>
                     </form>
-                    <!--
-                  <a class="add-answer" ng-click="showTheForm = !showTheForm"><i class="fa fa-plus-circle" ></i>
- Got another answer?</a>
--->
-
                   </div>
+
+                  <a class="important" ng-click="important(question)" ng-show="admin"><i class="fa fa-star"></i>Mark important</a>
 
                 </div>
 
@@ -136,8 +134,8 @@
 
           <!--Favorites-->
           <div class="col-md-6">
-            <h2>Questions of the Week</h2>
-            <div class="questions" ng-repeat="question in questions | orderBy:'-date' | orderBy:'status'" ng-show="question.heart > 4">
+            <h2>Important Question</h2>
+            <div class="questions" ng-repeat="question in questions | orderBy:'-date' | orderBy:'status'" ng-show="question.important">
               <div class="row">
                 <div class="col-md-11 ">
                   <div class="by" ng-hide=(question.anonymous)>{{question.author}}</div>
