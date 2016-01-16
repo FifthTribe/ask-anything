@@ -1,6 +1,6 @@
 <div ng-controller="FirebaseCtrl">
   <!--  Question Input-->
-  <section class="home">
+  <section class="main">
     <div class="container">
       <div class="header">
         <div class="dropdown" style="float: right">
@@ -13,10 +13,8 @@
             <button class="user-setting" ng-click="anonymousOff()" ng-show="anonymous">Turn off anonymous</button>
             <button class="user-setting" ng-click="adminOn()" ng-show="admin" ng-hide="adminMode">Manager mode</button>
             <button class="user-setting" ng-click="adminOff()" ng-show="adminMode">Turn off manager</button>
-            <button class="user-setting" ng-click="anonymousSwitch()">Change password</button>
-            <li>
-              <button class="user-setting" ng-click="logoutUser()">Log out</button>
-            </li>
+            <button ng-controller="ModalCtrl" class="user-setting" ng-click="clickToOpen()">Change password</button>
+            <button class="user-setting" ng-click="logoutUser()">Log out</button>
           </ul>
         </div>
         <div class="anonymous" ng-show="anonymous">
@@ -69,12 +67,36 @@
                   <div class="date "> • {{question.date | date:'MM.dd.yyyy'}}</div>
                   <div class="q">{{question.text}}</div>
 
+                </div>
+                <!--  Heart-->
+                <div class="col-md-1 heart-column">
+                  <div class="heart"><a ng-click="heartQuestion(question)"><i class="fa fa-heart-o "></i></a><span class="heart-number">{{question.heart}}</span>
+                  </div>
+                </div>
+                <div class="col-md-12">
+
                   <!-- Answer input-->
                   <form class="answer-form" ng-submit="addAnswer(question)" ng-hide="question.status > 0">
                     <input ng-model="question.answer" placeholder="You have the answer?" />
                     <button type="submit">Submit</button>
                   </form>
-                  <a class="important" ng-click="important()" ng-show="admin">Mark important</a>
+                  <a class="important" ng-click="important(question)" ng-show="admin"><i class="fa fa-star"></i>Mark important</a>
+
+                </div>
+
+
+              </div>
+            </div>
+
+            <!--Answered-->
+            <div class="questions" ng-repeat="question in questions | orderBy:'-date'" ng-show="question.status > 0 && !question.important">
+              <div class="row">
+                <div class="col-md-11">
+                  <div class="by" ng-hide="question.anonymous || question.admin">{{question.author}}</div>
+                  <div class="by-anonymous" ng-show=(question.anonymous)>Anonymous</div>
+                  <div class="by-admin" ng-show=(question.admin)>Company Survey</div>
+                  <div class="date "> • {{question.date | date:'MM.dd.yyyy'}}</div>
+                  <div class="q ">{{question.text}}</div>
 
                 </div>
 
@@ -83,21 +105,9 @@
                   <div class="heart"><a ng-click="heartQuestion(question)"><i class="fa fa-heart-o "></i></a><span class="heart-number">{{question.heart}}</span>
                   </div>
                 </div>
-              </div>
-            </div>
 
-            <!--Answered-->
-            <div class="questions" ng-repeat="question in questions | orderBy:'-date'" ng-show="question.status > 0 && !question.important">
-              <div class="row">
-                <div class="col-md-11 ">
-                  <div class="by" ng-hide="question.anonymous || question.admin">{{question.author}}</div>
-                  <div class="by-anonymous" ng-show=(question.anonymous)>Anonymous</div>
-                  <div class="by-admin" ng-show=(question.admin)>Company Survey</div>
-                  <div class="date "> • {{question.date | date:'MM.dd.yyyy'}}</div>
-                  <div class="q ">{{question.text}}</div>
-
-
-                  <!-- Anwser-->
+                <!-- Anwser-->
+                <div class="col-md-12">
                   <div class="answer-field" ng-repeat="answer in question.answers">
                     <div class="answer">
                       <div class="answered-by" ng-hide=(answer.anonymous)>{{answer.author}}
@@ -110,7 +120,7 @@
 
                   </div>
 
-                  <!--Hidden input-->
+                  <!--Answer input-->
                   <div class="hidden-input" ng-hide="question.status == 0">
                     <form class="muted-answer-form" ng-submit="addAnswer(question)" style="margin-bottom: 5px">
                       <input ng-model="question.answer" placeholder="You have a different idea?" />
@@ -122,14 +132,8 @@
 
                 </div>
 
-                <!--  Heart-->
-                <div class="col-md-1 heart-column">
-                  <div class="heart"><a ng-click="heartQuestion(question)"><i class="fa fa-heart-o "></i></a><span class="heart-number">{{question.heart}}</span>
-                  </div>
-                </div>
               </div>
             </div>
-
           </div>
 
           <!--Favorites-->
@@ -137,13 +141,18 @@
             <h2>Important Question</h2>
             <div class="questions" ng-repeat="question in questions | orderBy:'-date' | orderBy:'status'" ng-show="question.important">
               <div class="row">
-                <div class="col-md-11 ">
+                <div class="col-md-11">
                   <div class="by" ng-hide=(question.anonymous)>{{question.author}}</div>
                   <div class="by-anonymous" ng-show=(question.anonymous)>Anonymous</div>
                   <div class="date "> • {{question.date | date:'MM.dd.yyyy'}}</div>
                   <div class="q ">{{question.text}}</div>
-
-
+                </div>
+                <!--  Heart-->
+                <div class="col-md-1 heart column">
+                  <div class="heart"><a ng-click="heartQuestion(question)"><i class="fa fa-heart-o "></i></a><span class="heart-number">{{question.heart}}</span>
+                  </div>
+                </div>
+                <div class="col-md-12">
                   <!-- Anwser-->
                   <div class="answer-field" ng-repeat="answer in question.answers">
                     <div class="answered-by" ng-hide=(answer.anonymous)>{{answer.author}}</div>
@@ -168,17 +177,13 @@
 
                 </div>
 
-                <!--  Heart-->
-                <div class="col-md-1 heart column">
-                  <div class="heart"><a ng-click="heartQuestion(question)"><i class="fa fa-heart-o "></i></a><span class="heart-number">{{question.heart}}</span>
-                  </div>
-                </div>
+
               </div>
             </div>
-
           </div>
         </div>
       </div>
     </div>
-  </section>
+</div>
+</section>
 </div>

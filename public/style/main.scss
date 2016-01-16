@@ -51,7 +51,7 @@ h3 {
 }
 
 //HOME
-.home {
+.main {
   position: fixed;
   z-index: 1;
   width: 100%;
@@ -92,6 +92,7 @@ h3 {
     border-radius: 2px;
     padding: 0;
     button {
+      display: inline;
       width: 100%;
       text-align: left;
       background-color: white;
@@ -326,6 +327,7 @@ h3 {
   border: 1px solid rgba($main, .4);
   padding: 3px 10px;
   border-radius: 2px;
+  margin-bottom: 5px;
   input {
     border: none;
     background-color: transparent;
@@ -454,5 +456,23 @@ h3 {
     button {
       display: none;
     }
+  }
+}
+
+
+//MODAL
+.modal {
+  img {
+    position: relative;
+    margin-top: 15%;
+    margin-bottom: 15px;
+    max-width: 400px;
+  }
+  .description {
+    font-size: 16px;
+    font-weight: 400;
+    color: grey;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 }

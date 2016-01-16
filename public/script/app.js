@@ -1,7 +1,7 @@
 (function () {
 
   // Start App Module
-  var askAnything = angular.module("askAnything", ['ngRoute', 'firebase']);
+  var askAnything = angular.module("askAnything", ['ngRoute', 'ngDialog', 'firebase']);
 
   //VIEW CONFIGURATION -------------------- 
 
@@ -19,10 +19,29 @@
         templateUrl: 'templates/signup.html',
         controller: 'FirebaseCtrl'
       }).
+      when('/reset-password', {
+        templateUrl: 'templates/reset-password.html',
+        controller: 'FirebaseCtrl'
+      }).
+      when('/change-password', {
+        templateUrl: 'templates/change-password.html',
+        controller: 'FirebaseCtrl'
+      }).
       otherwise({
         redirectTo: '/'
       });
   }]);
+
+  //  Modal controller
+
+  askAnything.controller('ModalCtrl', function ($scope, ngDialog) {
+    $scope.clickToOpen = function () {
+      ngDialog.open({
+        template: 'templates/change-password.html',
+        controller: 'FirebaseCtrl'
+      });
+    };
+  });
 
   //FIREBASE CONTROLLER--------------------
 
@@ -39,7 +58,7 @@
     $scope.confirm = "";
     $scope.userName = "";
     $scope.alert = "";
-
+    $scope.email = "";
     $scope.loggedInUser = "";
 
     //SIGN UP
@@ -116,7 +135,6 @@
             $location.path("/main");
           }, 0);
           console.log("Login sucess");
-
         }
       });
     }
@@ -157,18 +175,57 @@
       } else {}
     }
 
-    //    CHANGE PASSWORD 
-    ref.changePassword({
-      email: "bobtony@firebase.com",
-      oldPassword: "correcthorsebatterystaple",
-      newPassword: "neatsupersecurenewpassword"
-    }, function (error) {
-      if (error === null) {
-        console.log("Password changed successfully");
-      } else {
-        console.log("Error changing password:", error);
-      }
-    });
+    // RESET PASSWORD
+    $scope.resetPassword = function () {
+      userRef.resetPassword({
+        email: $scope.email
+      }, function (error) {
+        if (error) {
+          switch (error.code) {
+          case "INVALID_USER":
+            $scope.alert = "The specified user account does not exist.";
+            break;
+          default:
+            $scope.alert = "Error resetting password:" + error;
+          }
+        } else {
+          $timeout(function () {
+            $scope.alert = "Password reset email sent successfully!";
+          }, 0);
+        }
+      })
+    }
+
+    // CHANGE PASSWORD
+    $scope.directChangePassword = function () {
+      $location.path("/change-password");
+    };
+
+    $scope.resetPassword = function () {
+      console.log(authData.uid);
+      //      userRef.changePassword({
+      //        email: $scope.user,
+      //        oldPassword: $scope.currentPassword,
+      //        newPassword: $scope.newPassword
+      //      }, function (error) {
+      //        if (error) {
+      //          switch (error.code) {
+      //          case "INVALID_PASSWORD":
+      //            console.log("The specified user account password is incorrect.");
+      //            break;
+      //          case "INVALID_USER":
+      //            $scope.alert = "The specified user account does not exist.";
+      //            break;
+      //          default:
+      //            $scope.alert = "Error changing password:" + error;
+      //          }
+      //        } else {
+      //          $scope.alert = "User password changed successfully!";
+      //        }
+      //      });
+    }
+
+
 
     //    ADMIN MODE
     if ($scope.loggedInUser.indexOf("Anh" || "Khuram" || "Asif") == 1) {
