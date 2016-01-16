@@ -201,28 +201,27 @@
       $location.path("/change-password");
     };
 
-    $scope.resetPassword = function () {
-      console.log(authData.uid);
-      //      userRef.changePassword({
-      //        email: $scope.user,
-      //        oldPassword: $scope.currentPassword,
-      //        newPassword: $scope.newPassword
-      //      }, function (error) {
-      //        if (error) {
-      //          switch (error.code) {
-      //          case "INVALID_PASSWORD":
-      //            console.log("The specified user account password is incorrect.");
-      //            break;
-      //          case "INVALID_USER":
-      //            $scope.alert = "The specified user account does not exist.";
-      //            break;
-      //          default:
-      //            $scope.alert = "Error changing password:" + error;
-      //          }
-      //        } else {
-      //          $scope.alert = "User password changed successfully!";
-      //        }
-      //      });
+    $scope.changePassword = function () {
+      userRef.changePassword({
+        email: authData.password.email,
+        oldPassword: $scope.currentPassword,
+        newPassword: $scope.newPassword
+      }, function (error) {
+        if (error) {
+          switch (error.code) {
+          case "INVALID_PASSWORD":
+            console.log("The specified user account password is incorrect.");
+            break;
+          case "INVALID_USER":
+            $scope.alert = "The specified user account does not exist.";
+            break;
+          default:
+            $scope.alert = "Error changing password:" + error;
+          }
+        } else {
+          $scope.alert = "User password changed successfully!";
+        }
+      });
     }
 
 
