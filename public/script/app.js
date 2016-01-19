@@ -281,7 +281,7 @@
       var timestamp = new Date();
       $scope.questions.$add({
         text: $scope.newQuestionText,
-        important: false,
+        important: $scope.adminMode,
         date: timestamp.getTime(),
         author: $scope.loggedInUser,
         anonymous: $scope.anonymous,

@@ -240,20 +240,10 @@ h3 {
 }
 
 //QUESTION LIST
-.up {
-  padding: 10px 0;
-  color: $main;
-  font-size: 30px;
-  text-align: center;
-}
-
 .question-list {
   position: relative;
   z-index: 98;
   top: 480px;
-}
-
-.recent {
   background-color: $main;
   padding-top: 30px;
   padding-bottom: 50px;
@@ -262,6 +252,15 @@ h3 {
     color: white;
     margin-bottom: 30px;
   }
+}
+
+.recent-wrap,
+.important-wrap {}
+
+.important-wrap {
+  padding: 20px 20px;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, .3);
 }
 
 .questions {
@@ -291,6 +290,16 @@ h3 {
   font-size: 18px;
   color: black;
   font-weight: 400;
+}
+
+.author {
+  display: inline-block;
+  width: 85%;
+}
+
+.important-box {
+  display: inline-block;
+  width: 12%;
 }
 
 .company {
@@ -389,13 +398,15 @@ h3 {
 }
 
 .answered-by {
+  display: inline-block;
   color: $name;
   font-size: 14px;
   vertical-align: top;
 }
 
 .answered-by-anonymous {
-  color: black;
+  display: inline-block;
+  color: $name;
   opacity: .7;
   font-size: 14px;
   vertical-align: top;

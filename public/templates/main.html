@@ -1,7 +1,8 @@
 <div ng-controller="FirebaseCtrl">
-  <!--  Question Input-->
+  <!--    HEADER-->
   <div class="header">
     <div class="container">
+      <!--DROPDOWN-->
       <div class="dropdown" style="float: right">
         <button class="dropdown-toggle user-control" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
           Hello <span>{{loggedInUser}}</span>
@@ -16,6 +17,9 @@
           <button class="user-setting" ng-click="logoutUser()">Log out</button>
         </ul>
       </div>
+      <!--END DROPDOWN-->
+
+      <!--MODE ALERT-->
       <div class="anonymous" ng-show="anonymous">
         <i class="fa fa-bell"></i>You are in anomymous mode.
         <button ng-click="anonymousOff()">Turn off</button>
@@ -24,9 +28,13 @@
         <i class="fa fa-bell"></i>You are in manager mode. All questions will be submitted as company survey.
         <button ng-click="adminOff()">Turn off</button>
       </div>
+      <!--END MODE ALERT-->
     </div>
   </div>
 
+  <!--  END HEADER-->
+
+  <!--  QUESTION INPUT-->
   <section class="main">
     <div class="container">
       <div class="row askanything">
@@ -44,145 +52,140 @@
       </div>
     </div>
   </section>
+  <!--END QUESTION INPUT-->
 
-
-  <!--      List of question-->
+  <!--MAIN Q&A CONTENT-->
   <section class="question-list">
-    <div class="recent">
-      <div class="container">
+    <div class="container">
+      <div class="row">
 
-        <div class="row">
-          <div class="col-md-6">
-            <h2>Recently asked</h2>
-            <!-- Unanswered-->
-            <div class="questions" ng-repeat="question in questions | orderBy:'-date'" ng-show="question.status == 0 && !questions.important">
+        <!--RECENTLY ASK-->
+        <div class="col-md-6">
+          <h2>Recently asked</h2>
+          <div class="recent-wrap">
+            <div class="questions" ng-repeat="question in questions| orderBy:'-date'" ng-hide="question.important">
               <div class="row">
-                <div class="col-md-11 ">
-                  <div class="star" ng-show="question.admin">
-                    <i class="fa fa-star"></i></div>
-                  <div class="by" ng-hide="question.anonymous  || question.admin">{{question.author}}</div>
-                  <div class="by-anonymous" ng-show="question.anonymous">Anonymous</div>
-                  <div class="by-admin" ng-show="question.admin">Company Survey</div>
-                  <div class="date "> • {{question.date | date:'MM.dd.yyyy'}}</div>
-                  <div class="q">{{question.text}}</div>
+                <!--QUESTION-->
+                <div class="col-md-12">
+                  <!--AUTHOR-->
+                  <div class="author">
+                    <div class="star" ng-show="question.admin">
+                      <i class="fa fa-star"></i></div>
+                    <div class="by" ng-hide="question.anonymous  || question.admin">{{question.author}}</div>
+                    <div class="by-anonymous" ng-show="question.anonymous">Anonymous</div>
+                    <div class="by-admin" ng-show="question.admin">FT Management</div>
+                    <!--DATE-->
+                    <div class="date"> • {{question.date | date:'MM.dd.yyyy'}}</div>
 
+                  </div>
+
+                  <!--MARK IMPORTANT-->
+                  <div class="important-box">
+                    <a class="important" ng-click="important(question)" ng-show="admin"><i class="fa fa-star"></i>Feature</a>
+                  </div>
+
+                  <!--TEXT-->
+                  <div class="q">{{question.text}}</div>
                 </div>
-                <!--  Heart-->
-                <div class="col-md-1 heart-column">
-                  <div class="heart"><a ng-click="heartQuestion(question)"><i class="fa fa-heart-o "></i></a><span class="heart-number">{{question.heart}}</span>
+                <!--END QUESTION-->
+
+                <!--ANSWER(S)-->
+                <div class="col-md-12">
+                  <div class="answer-field" ng-repeat="answer in question.answers">
+                    <div class="answer">
+                      <!--AUTHOR-->
+                      <div class="answered-by" ng-hide=(answer.anonymous)>{{answer.author}}</div>
+                      <div class="answered-by-anonymous" ng-show=(answer.anonymous)>Anonymous</div>
+
+                      <!--DATE-->
+                      <div class="date"> • {{answer.date | date:'MM.dd.yyyy'}}</div>
+
+                      <!--TEXT-->
+                      <div class="answer-text">{{answer.text}}</div>
+                    </div>
+
+                    <!--VOTE-->
+                    <div class="answer-vote" ng-show="question.status > 1"><a ng-click="voteAnswer(answer)"><i class="fa fa-thumbs-o-up"></i></a><span class="vote-number">{{answer.vote}}</span></div>
                   </div>
                 </div>
-                <div class="col-md-12">
+                <!--END ANSWER(S)-->
 
-                  <!-- Answer input-->
+                <!--ANSWER FORM-->
+                <div class="col-md-12">
                   <form class="answer-form" ng-submit="addAnswer(question)" ng-hide="question.status > 0">
                     <input ng-model="question.answer" placeholder="You have the answer?" />
                     <button type="submit">Submit</button>
                   </form>
-                  <a class="important" ng-click="important(question)" ng-show="admin"><i class="fa fa-star"></i>Mark important</a>
 
                 </div>
-
-
-              </div>
-            </div>
-
-            <!--Answered-->
-            <div class="questions" ng-repeat="question in questions | orderBy:'-date'" ng-show="question.status > 0 && !question.important">
-              <div class="row">
-                <div class="col-md-11">
-                  <div class="by" ng-hide="question.anonymous || question.admin">{{question.author}}</div>
-                  <div class="by-anonymous" ng-show=(question.anonymous)>Anonymous</div>
-                  <div class="by-admin" ng-show=(question.admin)>Company Survey</div>
-                  <div class="date "> • {{question.date | date:'MM.dd.yyyy'}}</div>
-                  <div class="q ">{{question.text}}</div>
-
-                </div>
-
-                <!--  Heart-->
-                <div class="col-md-1 heart-column">
-                  <div class="heart"><a ng-click="heartQuestion(question)"><i class="fa fa-heart-o "></i></a><span class="heart-number">{{question.heart}}</span>
-                  </div>
-                </div>
-
-                <!-- Anwser-->
-                <div class="col-md-12">
-                  <div class="answer-field" ng-repeat="answer in question.answers">
-                    <div class="answer">
-                      <div class="answered-by" ng-hide=(answer.anonymous)>{{answer.author}}
-                        <div class="date "> • {{answer.date | date:'MM.dd.yyyy'}}</div>
-                      </div>
-                      <div class="answered-by-anonymous" ng-show=(answer.anonymous)>Anonymous</div>
-                      <div class="answer-text">{{answer.text}}</div>
-                    </div>
-                    <div class="answer-vote" ng-show="question.status > 1"><a ng-click="voteAnswer(answer)"><i class="fa fa-thumbs-o-up"></i></a><span class="vote-number">{{answer.vote}}</span></div>
-
-                  </div>
-
-                  <!--Answer input-->
-                  <div class="hidden-input" ng-hide="question.status == 0">
-                    <form class="muted-answer-form" ng-submit="addAnswer(question)" style="margin-bottom: 5px">
-                      <input ng-model="question.answer" placeholder="You have a different idea?" />
-                      <button type="submit">Submit</button>
-                    </form>
-                  </div>
-
-                  <a class="important" ng-click="important(question)" ng-show="admin"><i class="fa fa-star"></i>Mark important</a>
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-          <!--Favorites-->
-          <div class="col-md-6">
-            <h2>Important Question</h2>
-            <div class="questions" ng-repeat="question in questions | orderBy:'-date' | orderBy:'status'" ng-show="question.important">
-              <div class="row">
-                <div class="col-md-11">
-                  <div class="by" ng-hide=(question.anonymous)>{{question.author}}</div>
-                  <div class="by-anonymous" ng-show=(question.anonymous)>Anonymous</div>
-                  <div class="date "> • {{question.date | date:'MM.dd.yyyy'}}</div>
-                  <div class="q ">{{question.text}}</div>
-                </div>
-                <!--  Heart-->
-                <div class="col-md-1 heart column">
-                  <div class="heart"><a ng-click="heartQuestion(question)"><i class="fa fa-heart-o "></i></a><span class="heart-number">{{question.heart}}</span>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <!-- Anwser-->
-                  <div class="answer-field" ng-repeat="answer in question.answers">
-                    <div class="answered-by" ng-hide=(answer.anonymous)>{{answer.author}}</div>
-                    <div class="answer-anonymous" ng-show=(answer.anonymous)>Anonymous</div>
-                    <div class="answer">{{answer.text}}</div>
-                    <div class="answer-vote" ng-show="question.status > 1"><a ng-click="voteAnswer(answer)"><i class="fa fa-thumbs-o-up"></i></a><span class="vote-number">{{answer.vote}}</span></div>
-
-                  </div>
-
-                  <!--Hidden input-->
-                  <div class="hidden-input" ng-hide="question.status == 0">
-                    <form class="muted-answer-form" ng-submit="addAnswer(question)" style="margin-bottom: 5px">
-                      <input ng-model="question.answer" placeholder="You have a different idea?" />
-                      <button type="submit">Submit</button>
-                    </form>
-                    <!--
-                  <a class="add-answer" ng-click="showTheForm = !showTheForm"><i class="fa fa-plus-circle" ></i>
- Got another answer?</a>
--->
-
-                  </div>
-
-                </div>
-
+                <!--END ANSWER FORM-->
 
               </div>
             </div>
           </div>
         </div>
+        <!--END RECENTLY ASK-->
+
+        <!--IMPORTANT-->
+        <div class="col-md-6">
+          <h2>Featured Question</h2>
+          <div class="important-wrap">
+            <div class="questions" ng-repeat="question in questions | orderBy:'-date'" ng-show="question.important">
+              <div class="row">
+                <!--QUESTION-->
+                <div class="col-md-12 ">
+                  <!--AUTHOR-->
+                  <div class="star" ng-show="question.admin">
+                    <i class="fa fa-star"></i></div>
+                  <div class="by" ng-hide="question.anonymous  || question.admin">{{question.author}}</div>
+                  <div class="by-anonymous" ng-show="question.anonymous">Anonymous</div>
+                  <div class="by-admin" ng-show="question.admin">FT Management</div>
+                  <!--DATE-->
+                  <div class="date "> • {{question.date | date:'MM.dd.yyyy'}}</div>
+                  <!--TEXT-->
+                  <div class="q">{{question.text}}</div>
+                </div>
+                <!--END QUESTION-->
+
+                <!--ANSWER-->
+                <div class="col-md-12">
+                  <!--AUTHOR-->
+                  <div class="answer-field" ng-repeat="answer in question.answers">
+                    <div class="answered-by" ng-hide=(answer.anonymous)>{{answer.author}}</div>
+                    <div class="answered-by-anonymous" ng-show=(answer.anonymous)>Anonymous</div>
+
+                    <!--DATE-->
+                    <div class="date"> • {{answer.date | date:'MM.dd.yyyy'}}</div>
+
+                    <!--TEXT-->
+                    <div class="answer">{{answer.text}}</div>
+
+                    <!--VOTE-->
+                    <div class="answer-vote" ng-show="question.status > 1"><a ng-click="voteAnswer(answer)"><i class="fa fa-thumbs-o-up"></i></a><span class="vote-number">{{answer.vote}}</span></div>
+                  </div>
+                </div>
+                <!--END ANSWER-->
+
+                <!--ANSWER FORM-->
+                <div class="col-md-12">
+                  <div class="hidden-input" ng-hide="question.status == 0">
+                    <form class="muted-answer-form" ng-submit="addAnswer(question)" style="margin-bottom: 5px">
+                      <input ng-model="question.answer" placeholder="You have a different idea?" />
+                      <button type="submit">Submit</button>
+                    </form>
+                  </div>
+                </div>
+                <!--END ANSWER FORM-->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--END IMPORTANT-->
+
       </div>
     </div>
 </div>
 </section>
+<!--END MAIN Q&A CONTENT-->
+
 </div>
