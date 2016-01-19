@@ -205,22 +205,29 @@
       userRef.changePassword({
         email: authData.password.email,
         oldPassword: $scope.currentPassword,
-        newPassword: $scope.newPassword
+        newPassword: $scope.newPassword,
+        confirmPassword: $scope.confirmPassword,
       }, function (error) {
-        if (error) {
-          switch (error.code) {
-          case "INVALID_PASSWORD":
-            console.log("The specified user account password is incorrect.");
-            break;
-          case "INVALID_USER":
-            $scope.alert = "The specified user account does not exist.";
-            break;
-          default:
-            $scope.alert = "Error changing password:" + error;
+        $timeout(function () {
+          if ($scope.newPassword == $scope.confirmPassword) {
+            if (error) {
+              switch (error.code) {
+              case "INVALID_PASSWORD":
+                console.log("The specified user account password is incorrect.");
+                break;
+              case "INVALID_USER":
+                $scope.alert = "The specified user account does not exist.";
+                break;
+              default:
+                $scope.alert = "Error changing password:" + error;
+              }
+            } else {
+              $scope.alert = "User password changed successfully!";
+            }
+          } else {
+            $scope.alert = "Confirm password does not match"
           }
-        } else {
-          $scope.alert = "User password changed successfully!";
-        }
+        }, 0);
       });
     }
 

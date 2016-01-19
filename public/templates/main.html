@@ -1,45 +1,46 @@
 <div ng-controller="FirebaseCtrl">
   <!--  Question Input-->
+  <div class="header">
+    <div class="container">
+      <div class="dropdown" style="float: right">
+        <button class="dropdown-toggle user-control" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          Hello <span>{{loggedInUser}}</span>
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <button class="user-setting" ng-click="anonymousOn()" ng-hide="anonymous">Anonymous mode</button>
+          <button class="user-setting" ng-click="anonymousOff()" ng-show="anonymous">Turn off anonymous</button>
+          <button class="user-setting" ng-click="adminOn()" ng-show="admin" ng-hide="adminMode">Manager mode</button>
+          <button class="user-setting" ng-click="adminOff()" ng-show="adminMode">Turn off manager</button>
+          <button ng-controller="ModalCtrl" class="user-setting" ng-click="clickToOpen()">Change password</button>
+          <button class="user-setting" ng-click="logoutUser()">Log out</button>
+        </ul>
+      </div>
+      <div class="anonymous" ng-show="anonymous">
+        <i class="fa fa-bell"></i>You are in anomymous mode.
+        <button ng-click="anonymousOff()">Turn off</button>
+      </div>
+      <div class="anonymous" ng-show="adminMode">
+        <i class="fa fa-bell"></i>You are in manager mode. All questions will be submitted as company survey.
+        <button ng-click="adminOff()">Turn off</button>
+      </div>
+    </div>
+  </div>
+
   <section class="main">
     <div class="container">
-      <div class="header">
-        <div class="dropdown" style="float: right">
-          <button class="dropdown-toggle user-control" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Hello <span>{{loggedInUser}}</span>
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <button class="user-setting" ng-click="anonymousOn()" ng-hide="anonymous">Anonymous mode</button>
-            <button class="user-setting" ng-click="anonymousOff()" ng-show="anonymous">Turn off anonymous</button>
-            <button class="user-setting" ng-click="adminOn()" ng-show="admin" ng-hide="adminMode">Manager mode</button>
-            <button class="user-setting" ng-click="adminOff()" ng-show="adminMode">Turn off manager</button>
-            <button ng-controller="ModalCtrl" class="user-setting" ng-click="clickToOpen()">Change password</button>
-            <button class="user-setting" ng-click="logoutUser()">Log out</button>
-          </ul>
+      <div class="row askanything">
+        <div class="col-md-4 col-md-offset-4">
+          <img src="img/askanything.png">
         </div>
-        <div class="anonymous" ng-show="anonymous">
-          <i class="fa fa-bell"></i>You are in anomymous mode.
-          <button ng-click="anonymousOff()">Turn off</button>
-        </div>
-        <div class="anonymous" ng-show="adminMode">
-          <i class="fa fa-bell"></i>You are in manager mode. All questions will be submitted as company survey.
-          <button ng-click="adminOff()">Turn off</button>
-        </div>
-
-        <div class="row askanything">
-          <div class="col-md-4 col-md-offset-4">
-            <img src="img/askanything.png">
-          </div>
-          <div class="col-md-12">
-            <div class="add-question">
-              <form class="ask-form" name="myForm" ng-submit="addQuestion()">
-                <input ng-model="newQuestionText" placeholder="What do you want to know?" />
-                <button type="submit">Submit</button>
-              </form>
-            </div>
+        <div class="col-md-12">
+          <div class="add-question">
+            <form class="ask-form" name="myForm" ng-submit="addQuestion()">
+              <input ng-model="newQuestionText" placeholder="What do you want to know?" />
+              <button type="submit">Submit</button>
+            </form>
           </div>
         </div>
-
       </div>
     </div>
   </section>
@@ -47,8 +48,6 @@
 
   <!--      List of question-->
   <section class="question-list">
-    <div class="up"><i class="fa fa-arrow-circle-o-up"></i></i>
-    </div>
     <div class="recent">
       <div class="container">
 

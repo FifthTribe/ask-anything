@@ -72,8 +72,33 @@ h3 {
   }
 }
 
+.modal-box {
+  position: relative;
+  z-index: 100;
+  text-align: center;
+  img {
+    position: relative;
+    margin-top: 10%;
+    margin-bottom: 15px;
+    max-width: 400px;
+  }
+  .description {
+    font-size: 16px;
+    font-weight: 400;
+    color: grey;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
 .header {
-  padding-top: 15px;
+  position: fixed;
+  z-index: 99;
+  background-color: white;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
   .user-control {
     color: black;
     font-size: 15px;
@@ -224,7 +249,7 @@ h3 {
 
 .question-list {
   position: relative;
-  z-index: 100;
+  z-index: 98;
   top: 480px;
 }
 
@@ -458,7 +483,6 @@ h3 {
     }
   }
 }
-
 
 //MODAL
 .modal {
