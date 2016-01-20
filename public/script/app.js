@@ -267,8 +267,6 @@
     }
 
 
-
-
     //ADDING QUESTION LOGIC//-----------
 
     // Create a synchronized array
@@ -292,6 +290,14 @@
         likeBy: [],
       });
       $scope.newQuestionText = "";
+      if ($scope.adminMode = true) {
+        mailer.sendMail(compAnnouncementEmail, function (err, res) {
+          if (err) {
+            console.log(err)
+          }
+          console.log(res);
+        });
+      }
     };
 
     // MAKE IMPORTANT
